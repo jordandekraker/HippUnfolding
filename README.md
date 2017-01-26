@@ -2,7 +2,10 @@
 Laplace_unfold.m will perform the entire unfolding. Before using, be sure to follow these steps:
 
 -Download Nifti_tools toolbox for MATLAB and add to path
+    Link: https://www.mathworks.com/matlabcentral/fileexchange/8797-tools-for-nifti-and-analyze-image
 -Download toolbox_fast_marching toolbox for MATLAB and add to path
+    Link: https://www.mathworks.com/matlabcentral/fileexchange/6110-toolbox-fast-marching
+    
 -MEX the laplace_iters.m file (new filename laplace_iters_mex). This is not necessary, but speeds things up a lot!
 
 Test it out on the example data using the command:

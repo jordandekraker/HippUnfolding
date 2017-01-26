@@ -63,7 +63,7 @@ init = zeros(size(fg))+0.5;
 if exist('laplace_iters_mex') > 0 % if mex file exists, use that (its faster!)
     [Laplace_thickness,~] = laplace_iters_mex(fg,source,sink,init);
 else
-    print('no MEX file available. Running MATLAB code instead (slower)');
+    disp('no MEX file available. Running MATLAB code instead (slower)');
     [Laplace_thickness,~] = laplace_iters(fg,source,sink,init);
 end
 %% compute streamlines across gradient
