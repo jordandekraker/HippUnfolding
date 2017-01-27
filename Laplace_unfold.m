@@ -1,8 +1,9 @@
 function out = Laplace_unfold(fn)
 
 % performs laplacian unfolding on the image of manually labelled structures 
-% (.nii.gz). Output directory is a subdirectory in the same place
-% as the input file. 
+% (.nii.gz). Output directory is a subdirectory in the same folder as input
+% file, in subdirectory <input_nii_prefix>_unfolded
+
 
 % Expected manually labelled structures are: 
 % hippocampal grey matter (==1), 
@@ -66,7 +67,7 @@ fg = (Geodist_AP >= 0); %Greymatter. defining this way ignored isolated GM label
 if exist('laplace_iters_mex') > 0 % if mex file exists, use that (its faster!)
     [Laplace_AP,change_per_iter_AP] = laplace_iters_mex(fg,source,sink,Geodist_AP);
 else 
-    print('no MEX file available. Running MATLAB code instead (slower)');
+    disp('no MEX file available. Running MATLAB code instead (slower)');
     [Laplace_AP,change_per_iter_AP] = laplace_iters(fg,source,sink,Geodist_AP);
 end
 %figure; plot(change_per_iter_AP(5:end)); title('Change per iteration A-P');
@@ -148,7 +149,7 @@ fg=(Geodist_PD>=0); %Greymatter
 if exist('laplace_iters_mex') > 0 % if mex file exists, use that (its faster!)
     [Laplace_PD,change_per_iter_PD] = laplace_iters_mex(fg,source,sink,Geodist_PD);
 else
-    print('no MEX file available. Running MATLAB code instead (slower)');
+    disp('no MEX file available. Running MATLAB code instead (slower)');
     [Laplace_PD,change_per_iter_PD] = laplace_iters(fg,source,sink,Geodist_PD);
 end
 %figure; plot(change_per_iter_PD(5:end)); title('Change per iteration P-D');
