@@ -3,7 +3,7 @@ function out = Laplace_unfold(fn)
 % performs laplacian unfolding on the image of manually labelled structures 
 % (.nii.gz). Output directory is a subdirectory in the same folder as input
 % file, in subdirectory <input_nii_prefix>_unfolded
-% as the input file
+
 
 % Expected manually labelled structures are: 
 % hippocampal grey matter (==1), 
