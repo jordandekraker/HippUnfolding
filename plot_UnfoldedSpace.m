@@ -2,29 +2,25 @@ function out = plot_UnfoldedSpace(unfolded_fn,MRimage)
 % finds and plots the MRimage intensities at each A-P and P-D coordinate.
 % includes average borders from current study, and rescales the
 % image according to average real world size from the current study.
-<<<<<<< HEAD
+
 load('avg_borders.mat')
 SEM_borders = stdev_borders./sqrt(size(borders,3));
 
-
 load([unfolded_fn '/data.mat']);
 data = load_untouch_nii(MRimage);
-=======
 
-
-load([unfolded_fn '_Unfolded/data.mat']);
-data = load_untouch_nii(MRimage);
-load('SavedVariables.mat')
->>>>>>> 07d1c3d5fa4e37b0b4511b5b0ea06025fc605195
-
-%crop
-cropped_data = zeros(size(labelmap));
-cropped_data(:) = data.img(cropping==1);
+% crop (already done in the example image loaded here)
+cropped_data = data.img;
+% cropped_data = zeros(size(labelmap));
+% cropped_data(:) = data.img(cropping==1);
 
 %if left, flip on sagittal (z plane, or the third dimension in this matrix)
 if isleft
     cropped_data = flipdim(cropped_data,3);
 end
+
+
+%% run through all indexes and retreive intensities
 
 for AP = 1:100
     for PD = 1:100
@@ -40,13 +36,13 @@ for AP = 1:100
 end
 
 %% interpolate and smooth the map
+
 [Xq, Yq] = find(~isnan(flatmap));
 F = scatteredInterpolant(Xq,Yq,flatmap(~isnan(flatmap)),'nearest','nearest');
 [Xq, Yq] = find(isnan(flatmap));
 flatmap_interp = flatmap;
 flatmap_interp(isnan(flatmap)) = F(Xq,Yq);
 
-<<<<<<< HEAD
 %% plot!
 
 figure; hold on;
@@ -54,7 +50,7 @@ axis([1 100 1 100]);
 imagesc(flatmap_interp)
 colormap('jet')
 
-% overlay data from manual segmentations to help get oriented in UnfoldedSpace
+% overlay data from manual segmentations (in referenced paper) to help get oriented in UnfoldedSpace
 for b = 1:4
     y = avg_borders(:,b);
     x = [1:100]';
@@ -81,27 +77,4 @@ annotation('textbox',[0.30 0.1 0.20 0.06],'String',{'head'},'LineStyle','none');
 annotation('textbox',[0.18 0.1 0.20 0.06],'String',{'uncus'},'LineStyle','none');
 annotation('textbox',[0.115 0.15 0.20 0.06],'String',{sprintf('vert.\nunc.')},'LineStyle','none');
 
-=======
-%% warp according to average real world size from current study
-warped_flatmap_interp = nan(size(flatmap));
-for AP = 1:100
-    query = 1/(avg_nvoxels(AP)/100);
-    selection = 1:query:100;
-    warped_flatmap_interp(1:avg_nvoxels(AP),AP) = interp1(flatmap_interp(:,AP),selection);
 end
-
-%% plot!
-clims = [min(flatmap_interp(:)) max(flatmap_interp(:))];
-figure; hold on;
-axis([1 100 1 100]);
-a = imagesc(warped_flatmap_interp,clims);
-plot(warped_avg_borders,'k');
-xlabel('Anterior - Posterior (%)');
-ylabel('Proximal - Distal (%)(rescaled to true size)');
-title(sprintf([MRimage,'\nintensities in unfolded hippocampal space']));
-colormap(jet);
-set(a,'alphadata',~isnan(warped_flatmap_interp));
->>>>>>> 07d1c3d5fa4e37b0b4511b5b0ea06025fc605195
-
-end
-
