@@ -140,7 +140,7 @@ Laplace_PD = round((Laplace_PD*98)+1); %rescale 1-99 and round
 Laplace_PD(sink) = 100; %the very most distal part of DG. ~grandule cell layer
 
 %% clean up and save all variables
-clearvars -except change_per_iter_AP change_per_iter_PD cropping fn fn_noFT Laplace_AP Laplace_PD Laplace_thick Thickness_streamlengths isleft orig_labelmap labelmap
+clearvars -except SRLMcoveredSub_labelmap change_per_iter_AP change_per_iter_PD cropping fn fn_noFT Laplace_AP Laplace_PD Laplace_thick Thickness_streamlengths isleft orig_labelmap labelmap
 save(sprintf('%s_Unfolded/data',fn_noFT))
 
 toc
