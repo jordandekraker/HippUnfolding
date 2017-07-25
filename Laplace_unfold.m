@@ -67,13 +67,11 @@ Laplace_AP_bin4 = 4*ceil(Laplace_AP/4); %this is useful in finding DG in next st
 % compute thicknesses
 voxel_size = orig_labelmap.hdr.dime.pixdim(2);
 [Laplace_thick,Thickness_streamlengths,SRLMcoveredSub_labelmap] = compute_thickness(labelmap,voxel_size);
-%segment into bins of 4
-Laplace_thick = ceil(Laplace_thick*4); %rescale 0-4 and round up
 
 if ~isleft
-    save_var.img(cropping) = Laplace_thick;
+    save_var.img(cropping) = ceil(Laplace_thick*4); %rescale 0-4 and round up
 elseif isleft
-    save_var.img(cropping) = flipdim(Laplace_thick,3);
+    save_var.img(cropping) = flipdim(ceil(Laplace_thick*4),3);
 end
 save_fn = sprintf('%s_Unfolded/thickness_binned.nii.gz',fn_noFT);
 save_untouch_nii(save_var,save_fn);
