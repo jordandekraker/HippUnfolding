@@ -1,4 +1,4 @@
-START_DIR = /home/jordandekraker/matlab/Laplace_unfolding/myCode_subfunctions
+START_DIR = /home/jordandekraker/matlab/Laplace_unfolding/subfunctions
 
 MATLAB_ROOT = /usr/local/MATLAB/R2017a
 MAKEFILE = laplace_iters_mex.mk

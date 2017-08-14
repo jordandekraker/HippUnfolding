@@ -137,10 +137,10 @@ static void g_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src, const
 {
   static const int32_T dims[3] = { -1, -1, -1 };
 
-  const boolean_T bv0[3] = { true, true, true };
+  const boolean_T bv1[3] = { true, true, true };
 
   int32_T iv3[3];
-  emlrtCheckVsBuiltInR2012b(sp, msgId, src, "logical", false, 3U, dims, &bv0[0],
+  emlrtCheckVsBuiltInR2012b(sp, msgId, src, "logical", false, 3U, dims, &bv1[0],
     iv3);
   ret->size[0] = iv3[0];
   ret->size[1] = iv3[1];
@@ -156,10 +156,10 @@ static void h_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src, const
 {
   static const int32_T dims[3] = { -1, -1, -1 };
 
-  const boolean_T bv1[3] = { true, true, true };
+  const boolean_T bv2[3] = { true, true, true };
 
   int32_T iv4[3];
-  emlrtCheckVsBuiltInR2012b(sp, msgId, src, "double", false, 3U, dims, &bv1[0],
+  emlrtCheckVsBuiltInR2012b(sp, msgId, src, "double", false, 3U, dims, &bv2[0],
     iv4);
   ret->size[0] = iv4[0];
   ret->size[1] = iv4[1];

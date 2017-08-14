@@ -17,52 +17,52 @@
 #include "libmwimfilter.h"
 
 /* Variable Definitions */
-static emlrtRSInfo k_emlrtRSI = { 138, /* lineNo */
+static emlrtRSInfo h_emlrtRSI = { 138, /* lineNo */
   "imfilter",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/imfilter.m"/* pathName */
 };
 
-static emlrtRSInfo l_emlrtRSI = { 142, /* lineNo */
+static emlrtRSInfo i_emlrtRSI = { 142, /* lineNo */
   "imfilter",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/imfilter.m"/* pathName */
 };
 
-static emlrtRSInfo m_emlrtRSI = { 565, /* lineNo */
+static emlrtRSInfo j_emlrtRSI = { 565, /* lineNo */
   "imfilter",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/imfilter.m"/* pathName */
 };
 
-static emlrtRSInfo n_emlrtRSI = { 20,  /* lineNo */
+static emlrtRSInfo k_emlrtRSI = { 20,  /* lineNo */
   "padarray",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/padarray.m"/* pathName */
 };
 
-static emlrtRSInfo o_emlrtRSI = { 65,  /* lineNo */
+static emlrtRSInfo l_emlrtRSI = { 65,  /* lineNo */
   "padarray",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/padarray.m"/* pathName */
 };
 
-static emlrtRSInfo p_emlrtRSI = { 77,  /* lineNo */
+static emlrtRSInfo m_emlrtRSI = { 77,  /* lineNo */
   "padarray",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/padarray.m"/* pathName */
 };
 
-static emlrtRSInfo q_emlrtRSI = { 18,  /* lineNo */
+static emlrtRSInfo n_emlrtRSI = { 18,  /* lineNo */
   "repmat",                            /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/lib/matlab/elmat/repmat.m"/* pathName */
 };
 
-static emlrtRSInfo r_emlrtRSI = { 484, /* lineNo */
+static emlrtRSInfo o_emlrtRSI = { 484, /* lineNo */
   "padarray",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/padarray.m"/* pathName */
 };
 
-static emlrtRSInfo s_emlrtRSI = { 595, /* lineNo */
+static emlrtRSInfo p_emlrtRSI = { 595, /* lineNo */
   "imfilter",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/imfilter.m"/* pathName */
 };
 
-static emlrtRSInfo t_emlrtRSI = { 667, /* lineNo */
+static emlrtRSInfo q_emlrtRSI = { 667, /* lineNo */
   "imfilter",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/imfilter.m"/* pathName */
 };
@@ -121,13 +121,13 @@ static emlrtDCInfo c_emlrtDCI = { 575, /* lineNo */
   1                                    /* checkKind */
 };
 
-static emlrtRTEInfo p_emlrtRTEI = { 44,/* lineNo */
+static emlrtRTEInfo n_emlrtRTEI = { 44,/* lineNo */
   19,                                  /* colNo */
   "assertValidSizeArg",                /* fName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/assertValidSizeArg.m"/* pName */
 };
 
-static emlrtRTEInfo q_emlrtRTEI = { 59,/* lineNo */
+static emlrtRTEInfo o_emlrtRTEI = { 59,/* lineNo */
   15,                                  /* colNo */
   "assertValidSizeArg",                /* fName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/assertValidSizeArg.m"/* pName */
@@ -273,18 +273,18 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  st.site = &m_emlrtRSI;
-  b_st.site = &n_emlrtRSI;
+  st.site = &j_emlrtRSI;
+  b_st.site = &k_emlrtRSI;
   if ((a_tmp->size[0] == 0) || (a_tmp->size[1] == 0) || (a_tmp->size[2] == 0)) {
     for (i0 = 0; i0 < 3; i0++) {
       sizeA[i0] = (real_T)a_tmp->size[i0] + 2.0 * pad[i0];
     }
 
-    b_st.site = &o_emlrtRSI;
+    b_st.site = &l_emlrtRSI;
     varargin_1[0] = sizeA[0];
     varargin_1[1] = sizeA[1];
     varargin_1[2] = sizeA[2];
-    c_st.site = &q_emlrtRSI;
+    c_st.site = &n_emlrtRSI;
     k = 0;
     do {
       exitg1 = 0;
@@ -328,7 +328,7 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
     }
 
     if (!p) {
-      emlrtErrorWithMessageIdR2012b(&c_st, &p_emlrtRTEI,
+      emlrtErrorWithMessageIdR2012b(&c_st, &n_emlrtRTEI,
         "Coder:toolbox:eml_assert_valid_size_arg_invalidSizeVector", 4, 12,
         MIN_int32_T, 12, MAX_int32_T);
     }
@@ -339,7 +339,7 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
     }
 
     if (!(2.147483647E+9 >= n)) {
-      emlrtErrorWithMessageIdR2012b(&c_st, &q_emlrtRTEI, "Coder:MATLAB:pmaxsize",
+      emlrtErrorWithMessageIdR2012b(&c_st, &o_emlrtRTEI, "Coder:MATLAB:pmaxsize",
         0);
     }
 
@@ -358,8 +358,8 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
       sizeA[i0] = a_tmp->size[i0];
     }
 
-    b_st.site = &p_emlrtRSI;
-    c_st.site = &r_emlrtRSI;
+    b_st.site = &m_emlrtRSI;
+    c_st.site = &o_emlrtRSI;
     b_sizeA[0] = (uint32_T)sizeA[0];
     b_sizeA[1] = (uint32_T)sizeA[1];
     b_sizeA[2] = (uint32_T)sizeA[2];
@@ -646,19 +646,20 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
   emlrtHeapReferenceStackLeaveFcnR2012b(sp);
 }
 
-void imfilter(const emlrtStack *sp, emxArray_real_T *varargin_1)
+void imfilter(const emlrtStack *sp, emxArray_real_T *varargin_1, const real_T
+              varargin_2[27])
 {
   real_T finalSize[3];
   real_T pad[3];
   emxArray_real_T *a;
+  int32_T trueCount;
   int32_T i;
+  int32_T partialTrueCount;
+  int8_T tmp_data[27];
+  real_T nonzero_h_data[27];
+  boolean_T connb[27];
   real_T padSize[3];
-  real_T nonZeroKernel[26];
   real_T connDims[3];
-  static const boolean_T conn[27] = { true, true, true, true, true, true, true,
-    true, true, true, true, true, true, false, true, true, true, true, true,
-    true, true, true, true, true, true, true, true };
-
   emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
@@ -678,11 +679,34 @@ void imfilter(const emlrtStack *sp, emxArray_real_T *varargin_1)
   if (!((varargin_1->size[0] == 0) || (varargin_1->size[1] == 0) ||
         (varargin_1->size[2] == 0))) {
     emxInit_real_T(sp, &a, 3, &i_emlrtRTEI, true);
-    st.site = &k_emlrtRSI;
+    st.site = &h_emlrtRSI;
     padImage(&st, varargin_1, pad, a);
-    st.site = &l_emlrtRSI;
-    b_st.site = &s_emlrtRSI;
-    c_st.site = &t_emlrtRSI;
+    st.site = &i_emlrtRSI;
+    trueCount = 0;
+    for (i = 0; i < 27; i++) {
+      if (varargin_2[i] != 0.0) {
+        trueCount++;
+      }
+    }
+
+    partialTrueCount = 0;
+    for (i = 0; i < 27; i++) {
+      if (varargin_2[i] != 0.0) {
+        tmp_data[partialTrueCount] = (int8_T)(i + 1);
+        partialTrueCount++;
+      }
+    }
+
+    b_st.site = &p_emlrtRSI;
+    for (i = 0; i < trueCount; i++) {
+      nonzero_h_data[i] = varargin_2[tmp_data[i] - 1];
+    }
+
+    for (i = 0; i < 27; i++) {
+      connb[i] = (varargin_2[i] != 0.0);
+    }
+
+    c_st.site = &q_emlrtRSI;
     i = varargin_1->size[0] * varargin_1->size[1] * varargin_1->size[2];
     varargin_1->size[0] = (int32_T)finalSize[0];
     varargin_1->size[1] = (int32_T)finalSize[1];
@@ -691,19 +715,12 @@ void imfilter(const emlrtStack *sp, emxArray_real_T *varargin_1)
                       &d_emlrtRTEI);
     for (i = 0; i < 3; i++) {
       padSize[i] = a->size[i];
-    }
-
-    for (i = 0; i < 26; i++) {
-      nonZeroKernel[i] = 0.038461538461538457;
-    }
-
-    for (i = 0; i < 3; i++) {
       connDims[i] = 3.0;
     }
 
     imfilter_real64(&a->data[0], &varargin_1->data[0], 3.0, finalSize, 3.0,
-                    padSize, nonZeroKernel, 26.0, conn, 3.0, connDims, pad, 3.0,
-                    true, true);
+                    padSize, &nonzero_h_data[0], (real_T)trueCount, connb, 3.0,
+                    connDims, pad, 3.0, true, true);
     emxFree_real_T(&a);
   }
 

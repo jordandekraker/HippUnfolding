@@ -1,17 +1,22 @@
 function [LP, iter_change] = laplace_iters(source,sink,init,maxiters)
 
+change_threshold = 10^(-3);
+
 % iterative averaging filter to solve Laplace equation with greater
 % accuracy than initial fast-marching
 fg = (init(:)>=0);
 
-total_vol = sum(fg(:));
-change_threshold = total_vol/100000; %change threshold should depend on total volume - greater volumes require more
+% %filter set-up (26 nearest neighbours)
+% hl=ones(3,3,3);
+% nelem=numel(hl);
+% hl=hl./nelem;
+% hl=hl+hl(2,2,2)./(nelem-1); hl(2,2,2)=0;
 
-%filter set-up (26 nearest neighbours)
-hl=ones(3,3,3);
-nelem=numel(hl);
-hl=hl./nelem;
-hl=hl+hl(2,2,2)./(nelem-1); hl(2,2,2)=0;
+% filter set-up (6 NN) (safer, especially in cases of coronal non-oblique
+% where dark band is more likely to 'peak' through across diagonals
+hl = strel('sphere',1);
+hl = double(hl.Neighborhood);
+
 
 bg=(~source & ~sink & isnan(init));
 

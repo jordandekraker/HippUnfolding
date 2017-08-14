@@ -10,7 +10,6 @@ MEX {
 		emxFree_real_T;
 		emxFree_uint32_T;
 		emxInit_boolean_T;
-		emxInit_boolean_T1;
 		emxInit_int32_T;
 		emxInit_int32_T1;
 		emxInit_real_T;

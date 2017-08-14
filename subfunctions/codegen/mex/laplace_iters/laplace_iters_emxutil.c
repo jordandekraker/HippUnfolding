@@ -147,37 +147,6 @@ void emxInit_boolean_T(const emlrtStack *sp, emxArray_boolean_T **pEmxArray,
   }
 }
 
-void emxInit_boolean_T1(const emlrtStack *sp, emxArray_boolean_T **pEmxArray,
-  int32_T numDimensions, const emlrtRTEInfo *srcLocation, boolean_T doPush)
-{
-  emxArray_boolean_T *emxArray;
-  int32_T i;
-  *pEmxArray = (emxArray_boolean_T *)emlrtMallocMex(sizeof(emxArray_boolean_T));
-  if ((void *)*pEmxArray == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
-  }
-
-  if (doPush) {
-    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
-      emxFree_boolean_T);
-  }
-
-  emxArray = *pEmxArray;
-  emxArray->data = (boolean_T *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int32_T *)emlrtMallocMex((uint32_T)(sizeof(int32_T)
-    * numDimensions));
-  if ((void *)emxArray->size == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
-  }
-
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
-}
-
 void emxInit_int32_T(const emlrtStack *sp, emxArray_int32_T **pEmxArray, int32_T
                      numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
                      doPush)
