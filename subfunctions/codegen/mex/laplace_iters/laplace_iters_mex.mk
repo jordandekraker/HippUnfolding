@@ -12,6 +12,10 @@ SRC_FILES =  \
 	laplace_iters_terminate.c \
 	laplace_iters.c \
 	eml_int_forloop_overflow_check.c \
+	error.c \
+	sort1.c \
+	sortIdx.c \
+	eml_setop.c \
 	imfilter.c \
 	indexShapeCheck.c \
 	_coder_laplace_iters_info.c \

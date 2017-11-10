@@ -25,8 +25,7 @@
 #include "laplace_iters_types.h"
 
 /* Function Declarations */
-extern void imfilter(const emlrtStack *sp, emxArray_real_T *varargin_1, const
-                     real_T varargin_2[27]);
+extern void imfilter(const emlrtStack *sp, emxArray_real_T *varargin_1);
 
 #endif
 

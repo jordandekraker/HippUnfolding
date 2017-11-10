@@ -1,31 +1,28 @@
-function [LP, iter_change] = laplace_iters(source,sink,init,maxiters)
+function [LP, iter_change] = laplace_iters(fg,source,sink,init,maxiters,sz)
 
 change_threshold = 10^(-3);
 
-% iterative averaging filter to solve Laplace equation with greater
-% accuracy than initial fast-marching
-fg = (init(:)>=0);
-
-% %filter set-up (26 nearest neighbours)
-% hl=ones(3,3,3);
-% nelem=numel(hl);
-% hl=hl./nelem;
-% hl=hl+hl(2,2,2)./(nelem-1); hl(2,2,2)=0;
-
+%filter set-up (26 nearest neighbours)
+hl=ones(3,3,3);
 % filter set-up (6 NN) (safer, especially in cases of coronal non-oblique
-% where dark band is more likely to 'peak' through across diagonals
-hl = strel('sphere',1);
-hl = double(hl.Neighborhood);
+% where dark band is more likely to 'leak' across diagonals
+% hl = strel('sphere',1);
+% hl = double(hl.Neighborhood);
 
 
-bg=(~source & ~sink & isnan(init));
+elems = 1: sz(1)*sz(2)*sz(3);
 
-%set up vel
-vel=init; %geodist to initialize greymatter
+%set up all requisite variables
+vel = nan(sz);
+vel(fg)=init;
 vel(source)=0;
 vel(sink)=1;
+bg = (setdiff(elems,sort([fg;source;sink]))); % bg in logical
 vel(bg)=0; %must be insulated after filtering
 iter_change = zeros(1,maxiters);
+insulate_correction = zeros(sz); 
+insulate_correction([fg;source;sink]) = 1;
+insulate_correction = imfilter(insulate_correction,hl,'replicate','conv');
 
 % apply filter
 iters = 0;
@@ -36,10 +33,10 @@ while iters < maxiters %max iterations
     
     %insulate the grey matter so gradient doesn't pass between folds -
     %inspired by ndnanfilter
-    insulate_correction = imfilter(double(~bg),hl,'replicate','conv');
     velup = velup./insulate_correction;
-    velup(bg|source)=0;
-    velup(sink)=1;
+    velup(bg) = 0;
+    velup(source) = 0;
+    velup(sink) = 1;
     
     %stopping condition
     iter_change(iters) = nansum(abs(vel(fg)-velup(fg))); %compute change from last iteration

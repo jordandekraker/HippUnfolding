@@ -19,14 +19,14 @@
 
 /* Function Declarations */
 static void laplace_iters_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T
-  nrhs, const mxArray *prhs[4]);
+  nrhs, const mxArray *prhs[6]);
 
 /* Function Definitions */
 static void laplace_iters_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T
-  nrhs, const mxArray *prhs[4])
+  nrhs, const mxArray *prhs[6])
 {
   int32_T n;
-  const mxArray *inputs[4];
+  const mxArray *inputs[6];
   const mxArray *outputs[2];
   int32_T b_nlhs;
   emlrtStack st = { NULL,              /* site */
@@ -37,8 +37,8 @@ static void laplace_iters_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T
   st.tls = emlrtRootTLSGlobal;
 
   /* Check for proper number of arguments. */
-  if (nrhs != 4) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 4, 4,
+  if (nrhs != 6) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 6, 4,
                         13, "laplace_iters");
   }
 

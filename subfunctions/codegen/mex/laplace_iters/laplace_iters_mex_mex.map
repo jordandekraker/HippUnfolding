@@ -5,11 +5,9 @@ MEX {
 		emlrtMexFcnProperties;
 		laplace_iters;
 		emxEnsureCapacity;
-		emxFree_boolean_T;
 		emxFree_int32_T;
 		emxFree_real_T;
 		emxFree_uint32_T;
-		emxInit_boolean_T;
 		emxInit_int32_T;
 		emxInit_int32_T1;
 		emxInit_real_T;

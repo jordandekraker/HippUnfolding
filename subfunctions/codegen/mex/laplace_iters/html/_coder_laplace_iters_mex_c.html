@@ -31,14 +31,14 @@
 <a name="19"><font color="#888888 "><i>   19   </i></font></a>
 <a name="20"><font color="#888888 "><i>   20   </i></font></a><font color="#117755"><i>/* Function Declarations */</i></font>
 <a name="21"><font color="#888888 "><i>   21   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a href="#fcn_laplace_iters_mexFunction" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_laplace_iters_mexFunction');" target="_self"><font color="#1122aa">laplace_iters_mexFunction</font></a>(int32_T nlhs, mxArray *plhs[2], int32_T
-<a name="22"><font color="#888888 "><i>   22   </i></font></a>  nrhs, <font color="#112266"><b>const</b></font> mxArray *prhs[4]);
+<a name="22"><font color="#888888 "><i>   22   </i></font></a>  nrhs, <font color="#112266"><b>const</b></font> mxArray *prhs[6]);
 <a name="23"><font color="#888888 "><i>   23   </i></font></a>
 <a name="24"><font color="#888888 "><i>   24   </i></font></a><font color="#117755"><i>/* Function Definitions */</i></font>
 <a name="25"><font color="#888888 "><i>   25   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a name="fcn_laplace_iters_mexFunction">laplace_iters_mexFunction</a>(int32_T nlhs, mxArray *plhs[2], int32_T
-<a name="26"><font color="#888888 "><i>   26   </i></font></a>  nrhs, <font color="#112266"><b>const</b></font> mxArray *prhs[4])
+<a name="26"><font color="#888888 "><i>   26   </i></font></a>  nrhs, <font color="#112266"><b>const</b></font> mxArray *prhs[6])
 <a name="27"><font color="#888888 "><i>   27   </i></font></a><b>{</b>
 <a name="28"><font color="#888888 "><i>   28   </i></font></a>  int32_T n;
-<a name="29"><font color="#888888 "><i>   29   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *inputs[4];
+<a name="29"><font color="#888888 "><i>   29   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *inputs[6];
 <a name="30"><font color="#888888 "><i>   30   </i></font></a>  <font color="#112266"><b>const</b></font> mxArray *outputs[2];
 <a name="31"><font color="#888888 "><i>   31   </i></font></a>  int32_T b_nlhs;
 <a name="32"><font color="#888888 "><i>   32   </i></font></a>  emlrtStack st = <b>{</b> NULL,              <font color="#117755"><i>/* site */</i></font>
@@ -49,8 +49,8 @@
 <a name="37"><font color="#888888 "><i>   37   </i></font></a>  st.tls = emlrtRootTLSGlobal;
 <a name="38"><font color="#888888 "><i>   38   </i></font></a>
 <a name="39"><font color="#888888 "><i>   39   </i></font></a>  <font color="#117755"><i>/* Check for proper number of arguments. */</i></font>
-<a name="40"><font color="#888888 "><i>   40   </i></font></a>  <font color="#112266"><b>if</b></font> (nrhs != 4) <b>{</b>
-<a name="41"><font color="#888888 "><i>   41   </i></font></a>    emlrtErrMsgIdAndTxt(&amp;st, <font color="#1122ff">&quot;EMLRT:runTime:WrongNumberOfInputs&quot;</font>, 5, 12, 4, 4,
+<a name="40"><font color="#888888 "><i>   40   </i></font></a>  <font color="#112266"><b>if</b></font> (nrhs != 6) <b>{</b>
+<a name="41"><font color="#888888 "><i>   41   </i></font></a>    emlrtErrMsgIdAndTxt(&amp;st, <font color="#1122ff">&quot;EMLRT:runTime:WrongNumberOfInputs&quot;</font>, 5, 12, 6, 4,
 <a name="42"><font color="#888888 "><i>   42   </i></font></a>                        13, <font color="#1122ff">&quot;laplace_iters&quot;</font>);
 <a name="43"><font color="#888888 "><i>   43   </i></font></a>  <b>}</b>
 <a name="44"><font color="#888888 "><i>   44   </i></font></a>

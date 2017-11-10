@@ -25,9 +25,10 @@
 #include "laplace_iters_types.h"
 
 /* Function Declarations */
-extern void laplace_iters(const emlrtStack *sp, const emxArray_boolean_T *source,
-  const emxArray_boolean_T *sink, const emxArray_real_T *init, real_T maxiters,
-  emxArray_real_T *LP, emxArray_real_T *iter_change);
+extern void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
+  emxArray_real_T *source, const emxArray_real_T *sink, const emxArray_real_T
+  *init, real_T maxiters, const real_T sz[3], emxArray_real_T *LP,
+  emxArray_real_T *iter_change);
 
 #endif
 

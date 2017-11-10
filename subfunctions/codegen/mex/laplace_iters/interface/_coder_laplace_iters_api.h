@@ -25,7 +25,7 @@
 #include "laplace_iters_types.h"
 
 /* Function Declarations */
-extern void laplace_iters_api(const mxArray * const prhs[4], const mxArray *
+extern void laplace_iters_api(const mxArray * const prhs[6], const mxArray *
   plhs[2]);
 
 #endif
