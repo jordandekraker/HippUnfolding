@@ -4,6 +4,7 @@ change_threshold = 10^(-3);
 
 %filter set-up (26 nearest neighbours)
 hl=ones(3,3,3);
+hl = hl/26; hl(2,2,2) = 0;
 % filter set-up (6 NN) (safer, especially in cases of coronal non-oblique
 % where dark band is more likely to 'leak' across diagonals
 % hl = strel('sphere',1);
@@ -17,7 +18,7 @@ vel = nan(sz);
 vel(fg)=init;
 vel(source)=0;
 vel(sink)=1;
-bg = (setdiff(elems,sort([fg;source;sink]))); % bg in logical
+bg = (setdiff(elems,sort([fg;source;sink]))); % bg in indices
 vel(bg)=0; %must be insulated after filtering
 iter_change = zeros(1,maxiters);
 insulate_correction = zeros(sz); 
@@ -46,6 +47,6 @@ while iters < maxiters %max iterations
     end
 end
 vel = vel./max(vel(:));
-vel(~fg) = nan;
+vel([source;sink;bg;]) = nan;
 LP = vel;
 end
