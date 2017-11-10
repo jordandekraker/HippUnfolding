@@ -15,12 +15,12 @@
 #include "indexShapeCheck.h"
 
 /* Variable Definitions */
-static emlrtRSInfo dc_emlrtRSI = { 14, /* lineNo */
+static emlrtRSInfo cc_emlrtRSI = { 14, /* lineNo */
   "indexShapeCheck",                   /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/indexShapeCheck.m"/* pathName */
 };
 
-static emlrtRSInfo ec_emlrtRSI = { 80, /* lineNo */
+static emlrtRSInfo dc_emlrtRSI = { 80, /* lineNo */
   "indexShapeCheck",                   /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/indexShapeCheck.m"/* pathName */
 };
@@ -75,7 +75,7 @@ void indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[3], int32_T
     }
 
     if (nonSingletonDimFound) {
-      st.site = &dc_emlrtRSI;
+      st.site = &cc_emlrtRSI;
       if (((matrixSize[0] == 1) != (indexSize == 1)) || (matrixSize[1] != 1)) {
         nonSingletonDimFound = true;
       } else {
@@ -86,7 +86,7 @@ void indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[3], int32_T
         nonSingletonDimFound = true;
       }
 
-      b_st.site = &ec_emlrtRSI;
+      b_st.site = &dc_emlrtRSI;
       if (nonSingletonDimFound) {
         emlrtErrorWithMessageIdR2012b(&b_st, &fb_emlrtRTEI,
           "Coder:FE:PotentialMatrixMatrix", 0);

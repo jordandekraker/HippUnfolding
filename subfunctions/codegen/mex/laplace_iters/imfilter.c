@@ -17,52 +17,52 @@
 #include "libmwimfilter.h"
 
 /* Variable Definitions */
-static emlrtRSInfo rb_emlrtRSI = { 138,/* lineNo */
+static emlrtRSInfo qb_emlrtRSI = { 138,/* lineNo */
   "imfilter",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/imfilter.m"/* pathName */
 };
 
-static emlrtRSInfo sb_emlrtRSI = { 142,/* lineNo */
+static emlrtRSInfo rb_emlrtRSI = { 142,/* lineNo */
   "imfilter",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/imfilter.m"/* pathName */
 };
 
-static emlrtRSInfo tb_emlrtRSI = { 565,/* lineNo */
+static emlrtRSInfo sb_emlrtRSI = { 565,/* lineNo */
   "imfilter",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/imfilter.m"/* pathName */
 };
 
-static emlrtRSInfo ub_emlrtRSI = { 20, /* lineNo */
+static emlrtRSInfo tb_emlrtRSI = { 20, /* lineNo */
   "padarray",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/padarray.m"/* pathName */
 };
 
-static emlrtRSInfo vb_emlrtRSI = { 65, /* lineNo */
+static emlrtRSInfo ub_emlrtRSI = { 65, /* lineNo */
   "padarray",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/padarray.m"/* pathName */
 };
 
-static emlrtRSInfo wb_emlrtRSI = { 77, /* lineNo */
+static emlrtRSInfo vb_emlrtRSI = { 77, /* lineNo */
   "padarray",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/padarray.m"/* pathName */
 };
 
-static emlrtRSInfo xb_emlrtRSI = { 18, /* lineNo */
+static emlrtRSInfo wb_emlrtRSI = { 18, /* lineNo */
   "repmat",                            /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/lib/matlab/elmat/repmat.m"/* pathName */
 };
 
-static emlrtRSInfo yb_emlrtRSI = { 484,/* lineNo */
+static emlrtRSInfo xb_emlrtRSI = { 484,/* lineNo */
   "padarray",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/padarray.m"/* pathName */
 };
 
-static emlrtRSInfo ac_emlrtRSI = { 595,/* lineNo */
+static emlrtRSInfo yb_emlrtRSI = { 595,/* lineNo */
   "imfilter",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/imfilter.m"/* pathName */
 };
 
-static emlrtRSInfo bc_emlrtRSI = { 667,/* lineNo */
+static emlrtRSInfo ac_emlrtRSI = { 667,/* lineNo */
   "imfilter",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/images/images/eml/imfilter.m"/* pathName */
 };
@@ -116,7 +116,7 @@ static emlrtDCInfo j_emlrtDCI = { 575, /* lineNo */
   1                                    /* checkKind */
 };
 
-static emlrtBCInfo o_emlrtBCI = { -1,  /* iFirst */
+static emlrtBCInfo p_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
   594,                                 /* lineNo */
   16,                                  /* colNo */
@@ -140,7 +140,7 @@ static emlrtDCInfo k_emlrtDCI = { 80,  /* lineNo */
   1                                    /* checkKind */
 };
 
-static emlrtBCInfo p_emlrtBCI = { -1,  /* iFirst */
+static emlrtBCInfo q_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
   89,                                  /* lineNo */
   34,                                  /* colNo */
@@ -150,7 +150,7 @@ static emlrtBCInfo p_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo q_emlrtBCI = { -1,  /* iFirst */
+static emlrtBCInfo r_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
   89,                                  /* lineNo */
   39,                                  /* colNo */
@@ -160,7 +160,7 @@ static emlrtBCInfo q_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo r_emlrtBCI = { -1,  /* iFirst */
+static emlrtBCInfo s_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
   89,                                  /* lineNo */
   44,                                  /* colNo */
@@ -170,7 +170,7 @@ static emlrtBCInfo r_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo s_emlrtBCI = { -1,  /* iFirst */
+static emlrtBCInfo t_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
   89,                                  /* lineNo */
   49,                                  /* colNo */
@@ -180,7 +180,7 @@ static emlrtBCInfo s_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo t_emlrtBCI = { -1,  /* iFirst */
+static emlrtBCInfo u_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
   89,                                  /* lineNo */
   55,                                  /* colNo */
@@ -190,7 +190,7 @@ static emlrtBCInfo t_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo u_emlrtBCI = { -1,  /* iFirst */
+static emlrtBCInfo v_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
   89,                                  /* lineNo */
   60,                                  /* colNo */
@@ -200,7 +200,7 @@ static emlrtBCInfo u_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo v_emlrtBCI = { -1,  /* iFirst */
+static emlrtBCInfo w_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
   89,                                  /* lineNo */
   23,                                  /* colNo */
@@ -210,7 +210,7 @@ static emlrtBCInfo v_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo w_emlrtBCI = { -1,  /* iFirst */
+static emlrtBCInfo x_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
   89,                                  /* lineNo */
   25,                                  /* colNo */
@@ -220,7 +220,7 @@ static emlrtBCInfo w_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo x_emlrtBCI = { -1,  /* iFirst */
+static emlrtBCInfo y_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
   89,                                  /* lineNo */
   27,                                  /* colNo */
@@ -251,7 +251,7 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
   emxArray_real_T *y;
   real_T n;
   emxArray_uint32_T *idxDir;
-  emxArray_int32_T *r1;
+  emxArray_int32_T *r0;
   uint32_T u0;
   emxArray_int32_T *b_idxDir;
   int32_T iv0[1];
@@ -274,18 +274,18 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  st.site = &tb_emlrtRSI;
-  b_st.site = &ub_emlrtRSI;
+  st.site = &sb_emlrtRSI;
+  b_st.site = &tb_emlrtRSI;
   if ((a_tmp->size[0] == 0) || (a_tmp->size[1] == 0) || (a_tmp->size[2] == 0)) {
     for (i1 = 0; i1 < 3; i1++) {
       sizeA[i1] = (real_T)a_tmp->size[i1] + 2.0 * pad[i1];
     }
 
-    b_st.site = &vb_emlrtRSI;
+    b_st.site = &ub_emlrtRSI;
     varargin_1[0] = sizeA[0];
     varargin_1[1] = sizeA[1];
     varargin_1[2] = sizeA[2];
-    c_st.site = &xb_emlrtRSI;
+    c_st.site = &wb_emlrtRSI;
     k = 0;
     do {
       exitg1 = 0;
@@ -360,8 +360,8 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
       sizeA[i1] = a_tmp->size[i1];
     }
 
-    b_st.site = &wb_emlrtRSI;
-    c_st.site = &yb_emlrtRSI;
+    b_st.site = &vb_emlrtRSI;
+    c_st.site = &xb_emlrtRSI;
     b_sizeA[0] = (uint32_T)sizeA[0];
     b_sizeA[1] = (uint32_T)sizeA[1];
     b_sizeA[2] = (uint32_T)sizeA[2];
@@ -376,7 +376,7 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
       }
     }
 
-    emxInit_int32_T(&c_st, &idxA, 2, &l_emlrtRTEI, true);
+    emxInit_int32_T1(&c_st, &idxA, 2, &l_emlrtRTEI, true);
     emxInit_real_T(&c_st, &y, 2, &k_emlrtRTEI, true);
     if ((real_T)mtmp != (int32_T)mtmp) {
       emlrtIntegerCheckR2012b(mtmp, &j_emlrtDCI, &c_st);
@@ -422,25 +422,25 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
       idxDir->data[idxDir->size[0] * (i1 + 1)] = u0;
     }
 
-    emxInit_int32_T1(&c_st, &r1, 1, &k_emlrtRTEI, true);
+    emxInit_int32_T(&c_st, &r0, 1, &k_emlrtRTEI, true);
     idxDir->data[idxDir->size[0] * (1 + y->size[1])] = (uint32_T)sizeA[0];
     i1 = (int32_T)mtmp;
     ix = idxDir->size[1];
     if (!((ix >= 1) && (ix <= i1))) {
-      emlrtDynamicBoundsCheckR2012b(ix, 1, i1, &o_emlrtBCI, &c_st);
+      emlrtDynamicBoundsCheckR2012b(ix, 1, i1, &p_emlrtBCI, &c_st);
     }
 
     ix = idxDir->size[1];
-    i1 = r1->size[0];
-    r1->size[0] = ix;
-    emxEnsureCapacity(&c_st, (emxArray__common *)r1, i1, sizeof(int32_T),
+    i1 = r0->size[0];
+    r0->size[0] = ix;
+    emxEnsureCapacity(&c_st, (emxArray__common *)r0, i1, sizeof(int32_T),
                       &k_emlrtRTEI);
     for (i1 = 0; i1 < ix; i1++) {
-      r1->data[i1] = i1;
+      r0->data[i1] = i1;
     }
 
-    emxInit_int32_T(&c_st, &b_idxDir, 2, &k_emlrtRTEI, true);
-    iv0[0] = r1->size[0];
+    emxInit_int32_T1(&c_st, &b_idxDir, 2, &k_emlrtRTEI, true);
+    iv0[0] = r0->size[0];
     emlrtSubAssignSizeCheckR2012b(iv0, 1, *(int32_T (*)[2])idxDir->size, 2,
       &c_emlrtECI, &c_st);
     i1 = b_idxDir->size[0] * b_idxDir->size[1];
@@ -454,9 +454,9 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
         [idxDir->size[0] * i1];
     }
 
-    ix = r1->size[0];
+    ix = r0->size[0];
     for (i1 = 0; i1 < ix; i1++) {
-      idxA->data[r1->data[i1]] = b_idxDir->data[i1];
+      idxA->data[r0->data[i1]] = b_idxDir->data[i1];
     }
 
     emxFree_int32_T(&b_idxDir);
@@ -498,20 +498,20 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
     i1 = idxA->size[0];
     ix = idxDir->size[1];
     if (!((ix >= 1) && (ix <= i1))) {
-      emlrtDynamicBoundsCheckR2012b(ix, 1, i1, &o_emlrtBCI, &c_st);
+      emlrtDynamicBoundsCheckR2012b(ix, 1, i1, &p_emlrtBCI, &c_st);
     }
 
     ix = idxDir->size[1];
-    i1 = r1->size[0];
-    r1->size[0] = ix;
-    emxEnsureCapacity(&c_st, (emxArray__common *)r1, i1, sizeof(int32_T),
+    i1 = r0->size[0];
+    r0->size[0] = ix;
+    emxEnsureCapacity(&c_st, (emxArray__common *)r0, i1, sizeof(int32_T),
                       &k_emlrtRTEI);
     for (i1 = 0; i1 < ix; i1++) {
-      r1->data[i1] = i1;
+      r0->data[i1] = i1;
     }
 
-    emxInit_int32_T(&c_st, &c_idxDir, 2, &k_emlrtRTEI, true);
-    iv0[0] = r1->size[0];
+    emxInit_int32_T1(&c_st, &c_idxDir, 2, &k_emlrtRTEI, true);
+    iv0[0] = r0->size[0];
     emlrtSubAssignSizeCheckR2012b(iv0, 1, *(int32_T (*)[2])idxDir->size, 2,
       &c_emlrtECI, &c_st);
     i1 = c_idxDir->size[0] * c_idxDir->size[1];
@@ -525,9 +525,9 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
         [idxDir->size[0] * i1];
     }
 
-    ix = r1->size[0];
+    ix = r0->size[0];
     for (i1 = 0; i1 < ix; i1++) {
-      idxA->data[r1->data[i1] + idxA->size[0]] = c_idxDir->data[i1];
+      idxA->data[r0->data[i1] + idxA->size[0]] = c_idxDir->data[i1];
     }
 
     emxFree_int32_T(&c_idxDir);
@@ -569,21 +569,21 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
     i1 = idxA->size[0];
     ix = idxDir->size[1];
     if (!((ix >= 1) && (ix <= i1))) {
-      emlrtDynamicBoundsCheckR2012b(ix, 1, i1, &o_emlrtBCI, &c_st);
+      emlrtDynamicBoundsCheckR2012b(ix, 1, i1, &p_emlrtBCI, &c_st);
     }
 
     ix = idxDir->size[1];
-    i1 = r1->size[0];
-    r1->size[0] = ix;
-    emxEnsureCapacity(&c_st, (emxArray__common *)r1, i1, sizeof(int32_T),
+    i1 = r0->size[0];
+    r0->size[0] = ix;
+    emxEnsureCapacity(&c_st, (emxArray__common *)r0, i1, sizeof(int32_T),
                       &k_emlrtRTEI);
     emxFree_real_T(&y);
     for (i1 = 0; i1 < ix; i1++) {
-      r1->data[i1] = i1;
+      r0->data[i1] = i1;
     }
 
-    emxInit_int32_T(&c_st, &d_idxDir, 2, &k_emlrtRTEI, true);
-    iv0[0] = r1->size[0];
+    emxInit_int32_T1(&c_st, &d_idxDir, 2, &k_emlrtRTEI, true);
+    iv0[0] = r0->size[0];
     emlrtSubAssignSizeCheckR2012b(iv0, 1, *(int32_T (*)[2])idxDir->size, 2,
       &c_emlrtECI, &c_st);
     i1 = d_idxDir->size[0] * d_idxDir->size[1];
@@ -598,13 +598,13 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
     }
 
     emxFree_uint32_T(&idxDir);
-    ix = r1->size[0];
+    ix = r0->size[0];
     for (i1 = 0; i1 < ix; i1++) {
-      idxA->data[r1->data[i1] + (idxA->size[0] << 1)] = d_idxDir->data[i1];
+      idxA->data[r0->data[i1] + (idxA->size[0] << 1)] = d_idxDir->data[i1];
     }
 
     emxFree_int32_T(&d_idxDir);
-    emxFree_int32_T(&r1);
+    emxFree_int32_T(&r0);
     for (i1 = 0; i1 < 3; i1++) {
       n = (real_T)a_tmp->size[i1] + 2.0 * pad[i1];
       if (n != (int32_T)muDoubleScalarFloor(n)) {
@@ -629,49 +629,49 @@ static void padImage(const emlrtStack *sp, const emxArray_real_T *a_tmp, const
           i3 = a_tmp->size[0];
           i4 = idxA->size[0];
           if (!((i >= 1) && (i <= i4))) {
-            emlrtDynamicBoundsCheckR2012b(i, 1, i4, &q_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(i, 1, i4, &r_emlrtBCI, &st);
           }
 
           i4 = idxA->data[i - 1];
           if (!((i4 >= 1) && (i4 <= i3))) {
-            emlrtDynamicBoundsCheckR2012b(i4, 1, i3, &p_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(i4, 1, i3, &q_emlrtBCI, &st);
           }
 
           i3 = a_tmp->size[1];
           i5 = idxA->size[0];
           if (!((j >= 1) && (j <= i5))) {
-            emlrtDynamicBoundsCheckR2012b(j, 1, i5, &s_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(j, 1, i5, &t_emlrtBCI, &st);
           }
 
           i5 = idxA->data[(j + idxA->size[0]) - 1];
           if (!((i5 >= 1) && (i5 <= i3))) {
-            emlrtDynamicBoundsCheckR2012b(i5, 1, i3, &r_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(i5, 1, i3, &s_emlrtBCI, &st);
           }
 
           i3 = a_tmp->size[2];
           i6 = idxA->size[0];
           if (!((k >= 1) && (k <= i6))) {
-            emlrtDynamicBoundsCheckR2012b(k, 1, i6, &u_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(k, 1, i6, &v_emlrtBCI, &st);
           }
 
           i6 = idxA->data[(k + (idxA->size[0] << 1)) - 1];
           if (!((i6 >= 1) && (i6 <= i3))) {
-            emlrtDynamicBoundsCheckR2012b(i6, 1, i3, &t_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(i6, 1, i3, &u_emlrtBCI, &st);
           }
 
           i3 = a->size[0];
           if (!((i >= 1) && (i <= i3))) {
-            emlrtDynamicBoundsCheckR2012b(i, 1, i3, &v_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(i, 1, i3, &w_emlrtBCI, &st);
           }
 
           i3 = a->size[1];
           if (!((j >= 1) && (j <= i3))) {
-            emlrtDynamicBoundsCheckR2012b(j, 1, i3, &w_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(j, 1, i3, &x_emlrtBCI, &st);
           }
 
           i3 = a->size[2];
           if (!((k >= 1) && (k <= i3))) {
-            emlrtDynamicBoundsCheckR2012b(k, 1, i3, &x_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(k, 1, i3, &y_emlrtBCI, &st);
           }
 
           a->data[((i + a->size[0] * (j - 1)) + a->size[0] * a->size[1] * (k - 1))
@@ -694,9 +694,12 @@ void imfilter(const emlrtStack *sp, emxArray_real_T *varargin_1)
   emxArray_real_T *a;
   int32_T i;
   real_T padSize[3];
-  real_T nonZeroKernel[27];
-  boolean_T conn[27];
+  real_T nonZeroKernel[26];
   real_T connDims[3];
+  static const boolean_T conn[27] = { true, true, true, true, true, true, true,
+    true, true, true, true, true, true, false, true, true, true, true, true,
+    true, true, true, true, true, true, true, true };
+
   emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
@@ -715,12 +718,12 @@ void imfilter(const emlrtStack *sp, emxArray_real_T *varargin_1)
   pad[2] = 1.0;
   if (!((varargin_1->size[0] == 0) || (varargin_1->size[1] == 0) ||
         (varargin_1->size[2] == 0))) {
-    emxInit_real_T1(sp, &a, 3, &t_emlrtRTEI, true);
-    st.site = &rb_emlrtRSI;
+    emxInit_real_T2(sp, &a, 3, &t_emlrtRTEI, true);
+    st.site = &qb_emlrtRSI;
     padImage(&st, varargin_1, pad, a);
-    st.site = &sb_emlrtRSI;
-    b_st.site = &ac_emlrtRSI;
-    c_st.site = &bc_emlrtRSI;
+    st.site = &rb_emlrtRSI;
+    b_st.site = &yb_emlrtRSI;
+    c_st.site = &ac_emlrtRSI;
     i = varargin_1->size[0] * varargin_1->size[1] * varargin_1->size[2];
     varargin_1->size[0] = (int32_T)finalSize[0];
     varargin_1->size[1] = (int32_T)finalSize[1];
@@ -731,9 +734,8 @@ void imfilter(const emlrtStack *sp, emxArray_real_T *varargin_1)
       padSize[i] = a->size[i];
     }
 
-    for (i = 0; i < 27; i++) {
-      nonZeroKernel[i] = 1.0;
-      conn[i] = true;
+    for (i = 0; i < 26; i++) {
+      nonZeroKernel[i] = 0.038461538461538464;
     }
 
     for (i = 0; i < 3; i++) {
@@ -741,7 +743,7 @@ void imfilter(const emlrtStack *sp, emxArray_real_T *varargin_1)
     }
 
     imfilter_real64(&a->data[0], &varargin_1->data[0], 3.0, finalSize, 3.0,
-                    padSize, nonZeroKernel, 27.0, conn, 3.0, connDims, pad, 3.0,
+                    padSize, nonZeroKernel, 26.0, conn, 3.0, connDims, pad, 3.0,
                     true, true);
     emxFree_real_T(&a);
   }

@@ -17,12 +17,12 @@
 #include "error.h"
 
 /* Variable Definitions */
-static emlrtRSInfo nb_emlrtRSI = { 225,/* lineNo */
+static emlrtRSInfo mb_emlrtRSI = { 225,/* lineNo */
   "eml_setop",                         /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/lib/matlab/ops/private/eml_setop.m"/* pathName */
 };
 
-static emlrtRSInfo pb_emlrtRSI = { 228,/* lineNo */
+static emlrtRSInfo ob_emlrtRSI = { 228,/* lineNo */
   "eml_setop",                         /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/lib/matlab/ops/private/eml_setop.m"/* pathName */
 };
@@ -154,7 +154,7 @@ void do_vectors(const emlrtStack *sp, const emxArray_real_T *a, const
   }
 
   if (!y) {
-    st.site = &nb_emlrtRSI;
+    st.site = &mb_emlrtRSI;
     error(&st);
   }
 
@@ -180,7 +180,7 @@ void do_vectors(const emlrtStack *sp, const emxArray_real_T *a, const
   }
 
   if (!y) {
-    st.site = &pb_emlrtRSI;
+    st.site = &ob_emlrtRSI;
     b_error(&st);
   }
 
@@ -288,7 +288,7 @@ void do_vectors(const emlrtStack *sp, const emxArray_real_T *a, const
       iafirst = nia;
     }
 
-    emxInit_int32_T1(sp, &b_ia, 1, &h_emlrtRTEI, true);
+    emxInit_int32_T(sp, &b_ia, 1, &h_emlrtRTEI, true);
     iblast = b_ia->size[0];
     b_ia->size[0] = iafirst;
     emxEnsureCapacity(sp, (emxArray__common *)b_ia, iblast, sizeof(int32_T),

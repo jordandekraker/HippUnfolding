@@ -21,97 +21,92 @@
 #include "laplace_iters_data.h"
 
 /* Variable Definitions */
-static emlrtRSInfo emlrtRSI = { 20,    /* lineNo */
+static emlrtRSInfo emlrtRSI = { 21,    /* lineNo */
   "laplace_iters",                     /* fcnName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pathName */
 };
 
-static emlrtRSInfo b_emlrtRSI = { 25,  /* lineNo */
+static emlrtRSInfo b_emlrtRSI = { 26,  /* lineNo */
   "laplace_iters",                     /* fcnName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pathName */
 };
 
-static emlrtRSInfo c_emlrtRSI = { 32,  /* lineNo */
+static emlrtRSInfo c_emlrtRSI = { 33,  /* lineNo */
   "laplace_iters",                     /* fcnName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pathName */
 };
 
-static emlrtRSInfo d_emlrtRSI = { 36,  /* lineNo */
+static emlrtRSInfo d_emlrtRSI = { 37,  /* lineNo */
   "laplace_iters",                     /* fcnName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pathName */
 };
 
-static emlrtRSInfo e_emlrtRSI = { 42,  /* lineNo */
+static emlrtRSInfo e_emlrtRSI = { 43,  /* lineNo */
   "laplace_iters",                     /* fcnName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pathName */
 };
 
-static emlrtRSInfo f_emlrtRSI = { 48,  /* lineNo */
+static emlrtRSInfo f_emlrtRSI = { 49,  /* lineNo */
   "laplace_iters",                     /* fcnName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pathName */
 };
 
-static emlrtRSInfo g_emlrtRSI = { 49,  /* lineNo */
-  "laplace_iters",                     /* fcnName */
-  "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pathName */
-};
-
-static emlrtRSInfo h_emlrtRSI = { 31,  /* lineNo */
+static emlrtRSInfo g_emlrtRSI = { 31,  /* lineNo */
   "sort",                              /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/lib/matlab/datafun/sort.m"/* pathName */
 };
 
-static emlrtRSInfo kb_emlrtRSI = { 19, /* lineNo */
+static emlrtRSInfo jb_emlrtRSI = { 19, /* lineNo */
   "setdiff",                           /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/lib/matlab/ops/setdiff.m"/* pathName */
 };
 
-static emlrtRSInfo lb_emlrtRSI = { 70, /* lineNo */
+static emlrtRSInfo kb_emlrtRSI = { 70, /* lineNo */
   "eml_setop",                         /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/lib/matlab/ops/private/eml_setop.m"/* pathName */
 };
 
-static emlrtRSInfo fc_emlrtRSI = { 16, /* lineNo */
+static emlrtRSInfo ec_emlrtRSI = { 16, /* lineNo */
   "abs",                               /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/lib/matlab/elfun/abs.m"/* pathName */
 };
 
-static emlrtRSInfo gc_emlrtRSI = { 67, /* lineNo */
+static emlrtRSInfo fc_emlrtRSI = { 67, /* lineNo */
   "applyScalarFunction",               /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/applyScalarFunction.m"/* pathName */
 };
 
-static emlrtRSInfo hc_emlrtRSI = { 7,  /* lineNo */
+static emlrtRSInfo gc_emlrtRSI = { 7,  /* lineNo */
   "nansum",                            /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/stats/eml/nansum.m"/* pathName */
 };
 
-static emlrtRSInfo ic_emlrtRSI = { 74, /* lineNo */
+static emlrtRSInfo hc_emlrtRSI = { 74, /* lineNo */
   "nan_sum_or_mean",                   /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/stats/eml/private/nan_sum_or_mean.m"/* pathName */
 };
 
-static emlrtRSInfo jc_emlrtRSI = { 13, /* lineNo */
+static emlrtRSInfo ic_emlrtRSI = { 13, /* lineNo */
   "max",                               /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/lib/matlab/datafun/max.m"/* pathName */
 };
 
-static emlrtRSInfo kc_emlrtRSI = { 19, /* lineNo */
+static emlrtRSInfo jc_emlrtRSI = { 19, /* lineNo */
   "minOrMax",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/minOrMax.m"/* pathName */
 };
 
-static emlrtRSInfo lc_emlrtRSI = { 140,/* lineNo */
+static emlrtRSInfo kc_emlrtRSI = { 140,/* lineNo */
   "minOrMax",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/minOrMax.m"/* pathName */
 };
 
-static emlrtRSInfo mc_emlrtRSI = { 376,/* lineNo */
+static emlrtRSInfo lc_emlrtRSI = { 376,/* lineNo */
   "minOrMax",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/minOrMax.m"/* pathName */
 };
 
-static emlrtRSInfo nc_emlrtRSI = { 348,/* lineNo */
+static emlrtRSInfo mc_emlrtRSI = { 348,/* lineNo */
   "minOrMax",                          /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/minOrMax.m"/* pathName */
 };
@@ -122,25 +117,25 @@ static emlrtRTEInfo emlrtRTEI = { 1,   /* lineNo */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pName */
 };
 
-static emlrtRTEInfo b_emlrtRTEI = { 13,/* lineNo */
+static emlrtRTEInfo b_emlrtRTEI = { 14,/* lineNo */
   1,                                   /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pName */
 };
 
-static emlrtRTEInfo c_emlrtRTEI = { 20,/* lineNo */
+static emlrtRTEInfo c_emlrtRTEI = { 21,/* lineNo */
   1,                                   /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pName */
 };
 
-static emlrtRTEInfo d_emlrtRTEI = { 23,/* lineNo */
+static emlrtRTEInfo d_emlrtRTEI = { 24,/* lineNo */
   1,                                   /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pName */
 };
 
-static emlrtRTEInfo e_emlrtRTEI = { 32,/* lineNo */
+static emlrtRTEInfo e_emlrtRTEI = { 33,/* lineNo */
   5,                                   /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pName */
@@ -181,48 +176,48 @@ static emlrtRTEInfo x_emlrtRTEI = { 13,/* lineNo */
 };
 
 static emlrtECInfo emlrtECI = { -1,    /* nDims */
-  42,                                  /* lineNo */
+  43,                                  /* lineNo */
   37,                                  /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pName */
 };
 
 static emlrtECInfo b_emlrtECI = { -1,  /* nDims */
-  17,                                  /* lineNo */
+  18,                                  /* lineNo */
   1,                                   /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m"/* pName */
 };
 
-static emlrtDCInfo emlrtDCI = { 22,    /* lineNo */
+static emlrtDCInfo emlrtDCI = { 23,    /* lineNo */
   23,                                  /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo b_emlrtDCI = { 22,  /* lineNo */
+static emlrtDCInfo b_emlrtDCI = { 23,  /* lineNo */
   23,                                  /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo c_emlrtDCI = { 16,  /* lineNo */
+static emlrtDCInfo c_emlrtDCI = { 17,  /* lineNo */
   11,                                  /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo d_emlrtDCI = { 16,  /* lineNo */
+static emlrtDCInfo d_emlrtDCI = { 17,  /* lineNo */
   11,                                  /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo e_emlrtDCI = { 17,  /* lineNo */
+static emlrtDCInfo e_emlrtDCI = { 18,  /* lineNo */
   5,                                   /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
@@ -230,23 +225,6 @@ static emlrtDCInfo e_emlrtDCI = { 17,  /* lineNo */
 };
 
 static emlrtBCInfo b_emlrtBCI = { -1,  /* iFirst */
-  -1,                                  /* iLast */
-  17,                                  /* lineNo */
-  5,                                   /* colNo */
-  "vel",                               /* aName */
-  "laplace_iters",                     /* fName */
-  "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo f_emlrtDCI = { 18,  /* lineNo */
-  5,                                   /* colNo */
-  "laplace_iters",                     /* fName */
-  "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo c_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
   18,                                  /* lineNo */
   5,                                   /* colNo */
@@ -256,14 +234,14 @@ static emlrtBCInfo c_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo g_emlrtDCI = { 19,  /* lineNo */
+static emlrtDCInfo f_emlrtDCI = { 19,  /* lineNo */
   5,                                   /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtBCInfo d_emlrtBCI = { -1,  /* iFirst */
+static emlrtBCInfo c_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
   19,                                  /* lineNo */
   5,                                   /* colNo */
@@ -273,7 +251,24 @@ static emlrtBCInfo d_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo h_emlrtDCI = { 21,  /* lineNo */
+static emlrtDCInfo g_emlrtDCI = { 20,  /* lineNo */
+  5,                                   /* colNo */
+  "laplace_iters",                     /* fName */
+  "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
+  1                                    /* checkKind */
+};
+
+static emlrtBCInfo d_emlrtBCI = { -1,  /* iFirst */
+  -1,                                  /* iLast */
+  20,                                  /* lineNo */
+  5,                                   /* colNo */
+  "vel",                               /* aName */
+  "laplace_iters",                     /* fName */
+  "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtDCInfo h_emlrtDCI = { 22,  /* lineNo */
   5,                                   /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
@@ -282,7 +277,7 @@ static emlrtDCInfo h_emlrtDCI = { 21,  /* lineNo */
 
 static emlrtBCInfo e_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  21,                                  /* lineNo */
+  22,                                  /* lineNo */
   5,                                   /* colNo */
   "vel",                               /* aName */
   "laplace_iters",                     /* fName */
@@ -290,7 +285,7 @@ static emlrtBCInfo e_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo i_emlrtDCI = { 23,  /* lineNo */
+static emlrtDCInfo i_emlrtDCI = { 24,  /* lineNo */
   29,                                  /* colNo */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
@@ -299,7 +294,7 @@ static emlrtDCInfo i_emlrtDCI = { 23,  /* lineNo */
 
 static emlrtBCInfo f_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  24,                                  /* lineNo */
+  25,                                  /* lineNo */
   21,                                  /* colNo */
   "insulate_correction",               /* aName */
   "laplace_iters",                     /* fName */
@@ -309,7 +304,7 @@ static emlrtBCInfo f_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo g_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  37,                                  /* lineNo */
+  38,                                  /* lineNo */
   11,                                  /* colNo */
   "velup",                             /* aName */
   "laplace_iters",                     /* fName */
@@ -319,7 +314,7 @@ static emlrtBCInfo g_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo h_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  38,                                  /* lineNo */
+  39,                                  /* lineNo */
   11,                                  /* colNo */
   "velup",                             /* aName */
   "laplace_iters",                     /* fName */
@@ -329,7 +324,7 @@ static emlrtBCInfo h_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo i_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  39,                                  /* lineNo */
+  40,                                  /* lineNo */
   11,                                  /* colNo */
   "velup",                             /* aName */
   "laplace_iters",                     /* fName */
@@ -339,7 +334,7 @@ static emlrtBCInfo i_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo j_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  42,                                  /* lineNo */
+  43,                                  /* lineNo */
   41,                                  /* colNo */
   "vel",                               /* aName */
   "laplace_iters",                     /* fName */
@@ -349,7 +344,7 @@ static emlrtBCInfo j_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo k_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  42,                                  /* lineNo */
+  43,                                  /* lineNo */
   51,                                  /* colNo */
   "velup",                             /* aName */
   "laplace_iters",                     /* fName */
@@ -369,7 +364,7 @@ static emlrtBCInfo l_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo m_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  42,                                  /* lineNo */
+  43,                                  /* lineNo */
   17,                                  /* colNo */
   "iter_change",                       /* aName */
   "laplace_iters",                     /* fName */
@@ -379,9 +374,19 @@ static emlrtBCInfo m_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo n_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  44,                                  /* lineNo */
+  45,                                  /* lineNo */
   20,                                  /* colNo */
   "iter_change",                       /* aName */
+  "laplace_iters",                     /* fName */
+  "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo o_emlrtBCI = { -1,  /* iFirst */
+  -1,                                  /* iLast */
+  50,                                  /* lineNo */
+  5,                                   /* colNo */
+  "vel",                               /* aName */
   "laplace_iters",                     /* fName */
   "/home/jordandekraker/matlab/Laplace_unfolding/subfunctions/laplace_iters.m",/* pName */
   0                                    /* checkKind */
@@ -403,7 +408,7 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
   int32_T b_LP;
   emxArray_real_T *x;
   emxArray_real_T *bg;
-  emxArray_int32_T *r0;
+  emxArray_real_T *c;
   int32_T ib_size[1];
   emxArray_real_T *insulate_correction;
   uint32_T iters;
@@ -496,7 +501,7 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
     LP->data[i0] = rtNaN;
   }
 
-  emxInit_int32_T1(sp, &ia, 1, &emlrtRTEI, true);
+  emxInit_int32_T(sp, &ia, 1, &emlrtRTEI, true);
   ixstart = (int32_T)sz[0] * (int32_T)sz[1] * (int32_T)sz[2];
   i0 = ia->size[0];
   ia->size[0] = fg->size[0];
@@ -575,7 +580,7 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
     LP->data[ia->data[i0] - 1] = 1.0;
   }
 
-  emxInit_real_T2(sp, &x, 1, &emlrtRTEI, true);
+  emxInit_real_T1(sp, &x, 1, &emlrtRTEI, true);
   st.site = &emlrtRSI;
   i0 = x->size[0];
   x->size[0] = (fg->size[0] + source->size[0]) + sink->size[0];
@@ -595,23 +600,31 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
     x->data[(i0 + fg->size[0]) + source->size[0]] = sink->data[i0];
   }
 
-  emxInit_real_T(&st, &bg, 2, &c_emlrtRTEI, true);
-  emxInit_int32_T(&st, &r0, 2, &emlrtRTEI, true);
-  b_st.site = &h_emlrtRSI;
+  emxInit_real_T1(&st, &bg, 1, &c_emlrtRTEI, true);
+  emxInit_real_T(&st, &c, 2, &emlrtRTEI, true);
+  b_st.site = &g_emlrtRSI;
   sort(&b_st, x);
   st.site = &emlrtRSI;
-  b_st.site = &kb_emlrtRSI;
-  c_st.site = &lb_emlrtRSI;
-  do_vectors(&c_st, elems, x, bg, ia, ib_size);
-
-  /*  bg in logical */
-  i0 = r0->size[0] * r0->size[1];
-  r0->size[0] = 1;
-  r0->size[1] = bg->size[1];
-  emxEnsureCapacity(sp, (emxArray__common *)r0, i0, sizeof(int32_T), &emlrtRTEI);
-  b_LP = LP->size[0] * LP->size[1] * LP->size[2];
-  n = bg->size[0] * bg->size[1];
+  b_st.site = &jb_emlrtRSI;
+  c_st.site = &kb_emlrtRSI;
+  do_vectors(&c_st, elems, x, c, ia, ib_size);
+  i0 = bg->size[0];
+  bg->size[0] = c->size[1];
+  emxEnsureCapacity(sp, (emxArray__common *)bg, i0, sizeof(real_T), &emlrtRTEI);
+  n = c->size[1];
   emxFree_real_T(&elems);
+  for (i0 = 0; i0 < n; i0++) {
+    bg->data[i0] = c->data[c->size[0] * i0];
+  }
+
+  emxFree_real_T(&c);
+
+  /*  bg in indices */
+  b_LP = LP->size[0] * LP->size[1] * LP->size[2];
+  i0 = ia->size[0];
+  ia->size[0] = bg->size[0];
+  emxEnsureCapacity(sp, (emxArray__common *)ia, i0, sizeof(int32_T), &emlrtRTEI);
+  n = bg->size[0];
   for (i0 = 0; i0 < n; i0++) {
     d = bg->data[i0];
     if (d != (int32_T)muDoubleScalarFloor(d)) {
@@ -623,12 +636,12 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
       emlrtDynamicBoundsCheckR2012b(ix, 1, b_LP, &e_emlrtBCI, sp);
     }
 
-    r0->data[i0] = ix;
+    ia->data[i0] = ix;
   }
 
-  n = r0->size[0] * r0->size[1];
+  n = ia->size[0];
   for (i0 = 0; i0 < n; i0++) {
-    LP->data[r0->data[i0] - 1] = 0.0;
+    LP->data[ia->data[i0] - 1] = 0.0;
   }
 
   /* must be insulated after filtering */
@@ -664,7 +677,7 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
     }
   }
 
-  emxInit_real_T1(sp, &insulate_correction, 3, &d_emlrtRTEI, true);
+  emxInit_real_T2(sp, &insulate_correction, 3, &d_emlrtRTEI, true);
   i0 = insulate_correction->size[0] * insulate_correction->size[1] *
     insulate_correction->size[2];
   insulate_correction->size[0] = (int32_T)sz[0];
@@ -721,8 +734,8 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
 
   /*  apply filter */
   iters = 0U;
-  emxInit_real_T1(sp, &velup, 3, &e_emlrtRTEI, true);
-  emxInit_real_T2(sp, &varargin_1, 1, &emlrtRTEI, true);
+  emxInit_real_T2(sp, &velup, 3, &e_emlrtRTEI, true);
+  emxInit_real_T1(sp, &varargin_1, 1, &emlrtRTEI, true);
   exitg1 = false;
   while ((!exitg1) && (iters < maxiters)) {
     /* max iterations */
@@ -782,25 +795,24 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
       velup->data[i0] /= insulate_correction->data[i0];
     }
 
-    i0 = r0->size[0] * r0->size[1];
-    r0->size[0] = 1;
-    r0->size[1] = bg->size[1];
-    emxEnsureCapacity(sp, (emxArray__common *)r0, i0, sizeof(int32_T),
-                      &emlrtRTEI);
     b_LP = velup->size[0] * velup->size[1] * velup->size[2];
-    n = bg->size[0] * bg->size[1];
+    i0 = ia->size[0];
+    ia->size[0] = bg->size[0];
+    emxEnsureCapacity(sp, (emxArray__common *)ia, i0, sizeof(int32_T),
+                      &emlrtRTEI);
+    n = bg->size[0];
     for (i0 = 0; i0 < n; i0++) {
       ix = (int32_T)bg->data[i0];
       if (!((ix >= 1) && (ix <= b_LP))) {
         emlrtDynamicBoundsCheckR2012b(ix, 1, b_LP, &g_emlrtBCI, sp);
       }
 
-      r0->data[i0] = ix;
+      ia->data[i0] = ix;
     }
 
-    n = r0->size[0] * r0->size[1];
+    n = ia->size[0];
     for (i0 = 0; i0 < n; i0++) {
-      velup->data[r0->data[i0] - 1] = 0.0;
+      velup->data[ia->data[i0] - 1] = 0.0;
     }
 
     b_LP = velup->size[0] * velup->size[1] * velup->size[2];
@@ -882,16 +894,16 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
         fg->data[i0] - 1];
     }
 
-    b_st.site = &fc_emlrtRSI;
+    b_st.site = &ec_emlrtRSI;
     x_idx_0 = (uint32_T)x->size[0];
     i0 = varargin_1->size[0];
     varargin_1->size[0] = (int32_T)x_idx_0;
     emxEnsureCapacity(&b_st, (emxArray__common *)varargin_1, i0, sizeof(real_T),
                       &emlrtRTEI);
-    c_st.site = &gc_emlrtRSI;
+    c_st.site = &fc_emlrtRSI;
     overflow = ((!(1 > x->size[0])) && (x->size[0] > 2147483646));
     if (overflow) {
-      d_st.site = &q_emlrtRSI;
+      d_st.site = &p_emlrtRSI;
       check_forloop_overflow_error(&d_st);
     }
 
@@ -900,7 +912,7 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
     }
 
     st.site = &e_emlrtRSI;
-    b_st.site = &hc_emlrtRSI;
+    b_st.site = &gc_emlrtRSI;
     if ((varargin_1->size[0] == 1) || (varargin_1->size[0] != 1)) {
       overflow = true;
     } else {
@@ -916,10 +928,10 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
       d = 0.0;
     } else {
       d = 0.0;
-      c_st.site = &ic_emlrtRSI;
+      c_st.site = &hc_emlrtRSI;
       overflow = (varargin_1->size[0] > 2147483646);
       if (overflow) {
-        d_st.site = &q_emlrtRSI;
+        d_st.site = &p_emlrtRSI;
         check_forloop_overflow_error(&d_st);
       }
 
@@ -975,15 +987,12 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
   }
 
   emxFree_real_T(&varargin_1);
-  emxFree_int32_T(&ia);
   emxFree_real_T(&x);
-  emxFree_int32_T(&r0);
   emxFree_real_T(&velup);
   emxFree_real_T(&insulate_correction);
-  emxFree_real_T(&bg);
   st.site = &f_emlrtRSI;
-  b_st.site = &jc_emlrtRSI;
-  c_st.site = &kc_emlrtRSI;
+  b_st.site = &ic_emlrtRSI;
+  c_st.site = &jc_emlrtRSI;
   if ((LP->size[0] * LP->size[1] * LP->size[2] == 1) || (LP->size[0] * LP->size
        [1] * LP->size[2] != 1)) {
     overflow = true;
@@ -1001,17 +1010,17 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
       "Coder:toolbox:eml_min_or_max_varDimZero", 0);
   }
 
-  d_st.site = &lc_emlrtRSI;
+  d_st.site = &kc_emlrtRSI;
   ixstart = 1;
   n = LP->size[0] * LP->size[1] * LP->size[2];
   d = LP->data[0];
   if (LP->size[0] * LP->size[1] * LP->size[2] > 1) {
     if (muDoubleScalarIsNaN(LP->data[0])) {
-      e_st.site = &nc_emlrtRSI;
+      e_st.site = &mc_emlrtRSI;
       overflow = ((!(2 > LP->size[0] * LP->size[1] * LP->size[2])) && (LP->size
         [0] * LP->size[1] * LP->size[2] > 2147483646));
       if (overflow) {
-        f_st.site = &q_emlrtRSI;
+        f_st.site = &p_emlrtRSI;
         check_forloop_overflow_error(&f_st);
       }
 
@@ -1029,11 +1038,11 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
     }
 
     if (ixstart < LP->size[0] * LP->size[1] * LP->size[2]) {
-      e_st.site = &mc_emlrtRSI;
+      e_st.site = &lc_emlrtRSI;
       overflow = ((!(ixstart + 1 > LP->size[0] * LP->size[1] * LP->size[2])) &&
                   (LP->size[0] * LP->size[1] * LP->size[2] > 2147483646));
       if (overflow) {
-        f_st.site = &q_emlrtRSI;
+        f_st.site = &p_emlrtRSI;
         check_forloop_overflow_error(&f_st);
       }
 
@@ -1057,7 +1066,47 @@ void laplace_iters(const emlrtStack *sp, const emxArray_real_T *fg, const
     LP->data[i0] /= d;
   }
 
-  st.site = &g_emlrtRSI;
+  b_LP = LP->size[0] * LP->size[1] * LP->size[2];
+  i0 = ia->size[0];
+  ia->size[0] = (source->size[0] + sink->size[0]) + bg->size[0];
+  emxEnsureCapacity(sp, (emxArray__common *)ia, i0, sizeof(int32_T), &emlrtRTEI);
+  n = source->size[0];
+  for (i0 = 0; i0 < n; i0++) {
+    ix = (int32_T)source->data[i0];
+    if (!((ix >= 1) && (ix <= b_LP))) {
+      emlrtDynamicBoundsCheckR2012b(ix, 1, b_LP, &o_emlrtBCI, sp);
+    }
+
+    ia->data[i0] = ix;
+  }
+
+  n = sink->size[0];
+  for (i0 = 0; i0 < n; i0++) {
+    ix = (int32_T)sink->data[i0];
+    if (!((ix >= 1) && (ix <= b_LP))) {
+      emlrtDynamicBoundsCheckR2012b(ix, 1, b_LP, &o_emlrtBCI, sp);
+    }
+
+    ia->data[i0 + source->size[0]] = ix;
+  }
+
+  n = bg->size[0];
+  for (i0 = 0; i0 < n; i0++) {
+    ix = (int32_T)bg->data[i0];
+    if (!((ix >= 1) && (ix <= b_LP))) {
+      emlrtDynamicBoundsCheckR2012b(ix, 1, b_LP, &o_emlrtBCI, sp);
+    }
+
+    ia->data[(i0 + source->size[0]) + sink->size[0]] = ix;
+  }
+
+  emxFree_real_T(&bg);
+  n = ia->size[0];
+  for (i0 = 0; i0 < n; i0++) {
+    LP->data[ia->data[i0] - 1] = rtNaN;
+  }
+
+  emxFree_int32_T(&ia);
   emlrtHeapReferenceStackLeaveFcnR2012b(sp);
 }
 

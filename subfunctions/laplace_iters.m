@@ -18,7 +18,7 @@ vel = nan(sz);
 vel(fg)=init;
 vel(source)=0;
 vel(sink)=1;
-bg = (setdiff(elems,sort([fg;source;sink]))); % bg in indices
+bg = (setdiff(elems,sort([fg;source;sink])))'; % bg in indices
 vel(bg)=0; %must be insulated after filtering
 iter_change = zeros(1,maxiters);
 insulate_correction = zeros(sz); 
@@ -47,6 +47,6 @@ while iters < maxiters %max iterations
     end
 end
 vel = vel./max(vel(:));
-vel([source;sink;bg;]) = nan;
+vel([source;sink;bg]) = nan;
 LP = vel;
 end

@@ -19,37 +19,37 @@
 #include "laplace_iters_data.h"
 
 /* Variable Definitions */
-static emlrtRSInfo i_emlrtRSI = { 50,  /* lineNo */
+static emlrtRSInfo h_emlrtRSI = { 50,  /* lineNo */
   "sort",                              /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/sort.m"/* pathName */
 };
 
-static emlrtRSInfo j_emlrtRSI = { 71,  /* lineNo */
+static emlrtRSInfo i_emlrtRSI = { 71,  /* lineNo */
   "sort",                              /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/sort.m"/* pathName */
 };
 
-static emlrtRSInfo k_emlrtRSI = { 74,  /* lineNo */
+static emlrtRSInfo j_emlrtRSI = { 74,  /* lineNo */
   "sort",                              /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/sort.m"/* pathName */
 };
 
-static emlrtRSInfo l_emlrtRSI = { 76,  /* lineNo */
+static emlrtRSInfo k_emlrtRSI = { 76,  /* lineNo */
   "sort",                              /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/sort.m"/* pathName */
 };
 
-static emlrtRSInfo m_emlrtRSI = { 79,  /* lineNo */
+static emlrtRSInfo l_emlrtRSI = { 79,  /* lineNo */
   "sort",                              /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/sort.m"/* pathName */
 };
 
-static emlrtRSInfo n_emlrtRSI = { 82,  /* lineNo */
+static emlrtRSInfo m_emlrtRSI = { 82,  /* lineNo */
   "sort",                              /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/sort.m"/* pathName */
 };
 
-static emlrtRSInfo o_emlrtRSI = { 84,  /* lineNo */
+static emlrtRSInfo n_emlrtRSI = { 84,  /* lineNo */
   "sort",                              /* fcnName */
   "/usr/local/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/sort.m"/* pathName */
 };
@@ -75,7 +75,7 @@ void sort(const emlrtStack *sp, emxArray_real_T *x)
   int32_T j;
   int32_T vstride;
   int32_T k;
-  emxArray_int32_T *oc_emlrtRSI;
+  emxArray_int32_T *nc_emlrtRSI;
   emlrtStack st;
   emlrtStack b_st;
   st.prev = sp;
@@ -88,19 +88,19 @@ void sort(const emlrtStack *sp, emxArray_real_T *x)
     dim = 1;
   }
 
-  st.site = &i_emlrtRSI;
+  st.site = &h_emlrtRSI;
   if (dim <= 1) {
     i7 = x->size[0];
   } else {
     i7 = 1;
   }
 
-  emxInit_real_T2(sp, &vwork, 1, &o_emlrtRTEI, true);
+  emxInit_real_T1(sp, &vwork, 1, &o_emlrtRTEI, true);
   j = vwork->size[0];
   vwork->size[0] = i7;
   emxEnsureCapacity(sp, (emxArray__common *)vwork, j, sizeof(real_T),
                     &f_emlrtRTEI);
-  st.site = &j_emlrtRSI;
+  st.site = &i_emlrtRSI;
   vstride = 1;
   k = 1;
   while (k <= dim - 1) {
@@ -108,19 +108,19 @@ void sort(const emlrtStack *sp, emxArray_real_T *x)
     k = 2;
   }
 
+  st.site = &j_emlrtRSI;
   st.site = &k_emlrtRSI;
-  st.site = &l_emlrtRSI;
   if ((!(1 > vstride)) && (vstride > 2147483646)) {
-    b_st.site = &q_emlrtRSI;
+    b_st.site = &p_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
 
   j = 0;
-  emxInit_int32_T1(sp, &oc_emlrtRSI, 1, &f_emlrtRTEI, true);
+  emxInit_int32_T(sp, &nc_emlrtRSI, 1, &f_emlrtRTEI, true);
   while (j + 1 <= vstride) {
-    st.site = &m_emlrtRSI;
+    st.site = &l_emlrtRSI;
     if ((!(1 > i7)) && (i7 > 2147483646)) {
-      b_st.site = &q_emlrtRSI;
+      b_st.site = &p_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
 
@@ -128,9 +128,9 @@ void sort(const emlrtStack *sp, emxArray_real_T *x)
       vwork->data[k] = x->data[j + k * vstride];
     }
 
+    st.site = &m_emlrtRSI;
+    sortIdx(&st, vwork, nc_emlrtRSI);
     st.site = &n_emlrtRSI;
-    sortIdx(&st, vwork, oc_emlrtRSI);
-    st.site = &o_emlrtRSI;
     for (k = 0; k + 1 <= i7; k++) {
       x->data[j + k * vstride] = vwork->data[k];
     }
@@ -138,7 +138,7 @@ void sort(const emlrtStack *sp, emxArray_real_T *x)
     j++;
   }
 
-  emxFree_int32_T(&oc_emlrtRSI);
+  emxFree_int32_T(&nc_emlrtRSI);
   emxFree_real_T(&vwork);
   emlrtHeapReferenceStackLeaveFcnR2012b(sp);
 }

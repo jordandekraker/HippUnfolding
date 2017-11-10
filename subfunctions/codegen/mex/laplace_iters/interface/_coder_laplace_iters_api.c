@@ -233,11 +233,11 @@ static real_T (*l_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
 
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T2(&st, &fg, 1, &n_emlrtRTEI, true);
-  emxInit_real_T2(&st, &source, 1, &n_emlrtRTEI, true);
-  emxInit_real_T2(&st, &sink, 1, &n_emlrtRTEI, true);
+  emxInit_real_T1(&st, &fg, 1, &n_emlrtRTEI, true);
+  emxInit_real_T1(&st, &source, 1, &n_emlrtRTEI, true);
+  emxInit_real_T1(&st, &sink, 1, &n_emlrtRTEI, true);
   emxInit_real_T(&st, &init, 2, &n_emlrtRTEI, true);
-  emxInit_real_T1(&st, &LP, 3, &n_emlrtRTEI, true);
+  emxInit_real_T2(&st, &LP, 3, &n_emlrtRTEI, true);
   emxInit_real_T(&st, &iter_change, 2, &n_emlrtRTEI, true);
 
   /* Marshall function inputs */
