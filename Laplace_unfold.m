@@ -50,16 +50,6 @@ sink = (labelmap==23); %indusium griseum
 
 [Laplace_AP,change_per_iter_AP] = laplace_solver(fg,source,sink,maxiters);
 
-%Segment into bins of 5 and save - primarily for visualization purposes
-save_var = orig_labelmap;
-if ~isleft
-    save_var.img(cropping) = ceil(Laplace_AP*20);
-elseif isleft
-    save_var.img(cropping) = flipdim(ceil(Laplace_AP*20),3);
-end
-save_fn = sprintf('%s_Unfolded/APgrad_binned.nii.gz',fn_noFT);
-save_untouch_nii(save_var,save_fn);
-
 Laplace_AP_bin=round((Laplace_AP*99)+1); %rescale 1-100 and round
 Laplace_AP_bin = 4*ceil(Laplace_AP_bin/4); %this is useful in finding DG in next step
 
@@ -67,15 +57,6 @@ Laplace_AP_bin = 4*ceil(Laplace_AP_bin/4); %this is useful in finding DG in next
 % compute thicknesses
 voxel_size = orig_labelmap.hdr.dime.pixdim(2);
 [Laplace_thick,Thickness_streamlengths,SRLMcoveredSub_labelmap] = compute_thickness(labelmap,voxel_size);
-
-if ~isleft
-    save_var.img(cropping) = ceil(Laplace_thick*4); %rescale 0-4 and round up
-elseif isleft
-    save_var.img(cropping) = flipdim(ceil(Laplace_thick*4),3);
-end
-save_fn = sprintf('%s_Unfolded/thickness_binned.nii.gz',fn_noFT);
-save_untouch_nii(save_var,save_fn);
-
 
 %% PD gradient: this needs a bit of set up first by finding the DG (as sink)
 
@@ -127,20 +108,8 @@ fg=(Geodist_PD>=0); %Greymatter
 
 [Laplace_PD,change_per_iter_PD] = laplace_solver(fg,source,sink,maxiters);
 
-%Segment into bins of 10, then save
-if ~isleft
-    save_var.img(cropping) = ceil(Laplace_PD*10);
-elseif isleft
-    save_var.img(cropping) = flipdim(ceil(Laplace_PD*10),3);
-end
-save_fn = sprintf('%s_Unfolded/PDgrad_binned.nii.gz',fn_noFT);
-save_untouch_nii(save_var,save_fn);
-
-Laplace_PD_bin = round((Laplace_PD*98)+1); %rescale 1-99 and round
-Laplace_PD_bin(sink) = 100; %the very most distal part of DG. ~grandule cell layer
-
 %% clean up and save all variables
-clearvars -except SRLMcoveredSub_labelmap change_per_iter_AP change_per_iter_PD cropping fn fn_noFT Laplace_AP Laplace_PD Laplace_thick Thickness_streamlengths isleft orig_labelmap labelmap
+clearvars -except SRLMcoveredSub_labelmap change_per_iter_AP change_per_iter_PD cropping fn fn_noFT Laplace_AP Laplace_PD Laplace_thick Thickness_streamlengths isleft orig_labelmap labelmap 
 save(sprintf('%s_Unfolded/data',fn_noFT))
 
 toc
