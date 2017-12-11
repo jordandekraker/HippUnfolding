@@ -60,8 +60,8 @@ end
 save_fn = sprintf('%s_Unfolded/APgrad_binned.nii.gz',fn_noFT);
 save_untouch_nii(save_var,save_fn);
 
-Laplace_AP=round((Laplace_AP*99)+1); %rescale 1-100 and round
-Laplace_AP_bin4 = 4*ceil(Laplace_AP/4); %this is useful in finding DG in next step
+Laplace_AP_bin=round((Laplace_AP*99)+1); %rescale 1-100 and round
+Laplace_AP_bin = 4*ceil(Laplace_AP_bin/4); %this is useful in finding DG in next step
 
 %% Laminar gradient
 % compute thicknesses
@@ -89,7 +89,7 @@ source = (labelmap==20); %EC
 
 %run separately on each AP bin
 for AP = 4:4:100
-    fg = (Laplace_AP_bin4 == AP); %use grey matter of this bin
+    fg = (Laplace_AP_bin == AP); %use grey matter of this bin
     vel = zeros(size(labelmap)); %initialize / clear previous
     vel(fg) = 0.5;
     vel(source) = 1;
@@ -136,8 +136,8 @@ end
 save_fn = sprintf('%s_Unfolded/PDgrad_binned.nii.gz',fn_noFT);
 save_untouch_nii(save_var,save_fn);
 
-Laplace_PD = round((Laplace_PD*98)+1); %rescale 1-99 and round
-Laplace_PD(sink) = 100; %the very most distal part of DG. ~grandule cell layer
+Laplace_PD_bin = round((Laplace_PD*98)+1); %rescale 1-99 and round
+Laplace_PD_bin(sink) = 100; %the very most distal part of DG. ~grandule cell layer
 
 %% clean up and save all variables
 clearvars -except SRLMcoveredSub_labelmap change_per_iter_AP change_per_iter_PD cropping fn fn_noFT Laplace_AP Laplace_PD Laplace_thick Thickness_streamlengths isleft orig_labelmap labelmap

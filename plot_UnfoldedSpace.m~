@@ -42,20 +42,18 @@ Nu=ceil(u*sz(2));
 Nv=ceil(v*sz(3));
 Nw=ceil(w*sz(1));
 
-reduce_thickness = linspace(sz(1),10,12);
+reduce_thickness = linspace(sz(1),10,10);
 
 %% plot!
 
 figure; 
-lin = linspace(0,1,12);
-for n = 1:12
-    i = lin(n);
-    j = 1-i;
+n=0;
+for i = linspace(0,1,12)
+    n=n+1;
     subplot(3,4,n);
-    Nw=ceil(w*reduce_thickness(n)) + sz(1)/2;
+    j = 1-i;
     scatter3(Nu*i + x*j, Nv*i + y*j, Nw*i + z*j,[],c); 
-    axis([0 sz(1) 0 sz(2) 0 sz(3)]); 
-    colormap('jet'); view(-1,0);
+    axis([]); colormap('jet');
 end
 
 
