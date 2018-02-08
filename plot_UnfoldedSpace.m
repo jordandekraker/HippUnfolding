@@ -23,12 +23,10 @@ end
 %% match indices
 sz = size(MRdata);
 
-inds=find(Laplace_PD>0 & Laplace_AP>0 & Laplace_thick>0 & Laplace_thick<1);
-
-u=Laplace_AP(inds);
-v=Laplace_PD(inds);
-w=Laplace_thick(inds);
-[x,y,z]=ind2sub(sz,inds);
+u=Laplace_AP;
+v=Laplace_PD;
+w=Laplace_IO;
+[x,y,z]=ind2sub(sz,idxgm);
 c = nan(size(x));
 for i = 1:length(x)
     c(i) = MRdata(x(i),y(i),z(i));
@@ -43,17 +41,17 @@ interp='linear';
 extrap='none';
 APres = 100;
 PDres = 100;
-thickres = 0;
+thickres = -4;
 Nu=ceil(u*APres);
 Nv=ceil(v*PDres);
 Nw=ceil(w*thickres);
 
 
 %% plot!
-nSubPlots = 9;
+nSubPlots = 4;
 
-v1 = linspace(-90,0,nSubPlots);
-v2 = linspace(0,90,nSubPlots);
+v1 = linspace(45,0,nSubPlots);
+v2 = linspace(45,90,nSubPlots);
 
 figure('units','normalized','outerposition',[0 0 1 1]); 
 lin = linspace(0,1,nSubPlots);
@@ -61,7 +59,7 @@ for n = 1:nSubPlots
     i = lin(n);
     j = 1-i;
     subplot(floor(sqrt(nSubPlots)),ceil(sqrt(nSubPlots)),n);
-    scatter3(Nu*i + x*j, Nv*i + y*j, Nw*i + z*j,[],c,'o');
+    scatter3(Nu*i + x*j, Nv*i + y*j, Nw*i + z*j,48,c,'.');
     axis equal; h = colorbar; ylabel(h, 'MR T1 over T2 (a.u.)');
     colormap('jet'); view(v1(n),v2(n))
     if n == 1
@@ -96,15 +94,15 @@ bx = [84 80]; by = [1,100]; plot(bx,by,'--k'); %tail
 a = gca;
 a = a.Position;
 annotation('textbox',[a(1:2)+([0.45 0.00].*a(3:4)) [0.08 0.06]],'String',{'Sub'},'LineStyle','none','FontWeight','bold');
-annotation('textbox',[a(1:2)+([0.45 0.30].*a(3:4)) [0.08 0.06]],'String',{'CA1'},'LineStyle','none','FontWeight','bold');
-annotation('textbox',[a(1:2)+([0.45 0.54].*a(3:4)) [0.08 0.06]],'String',{'CA2'},'LineStyle','none','FontWeight','bold');
-annotation('textbox',[a(1:2)+([0.45 0.66].*a(3:4)) [0.08 0.06]],'String',{'CA3'},'LineStyle','none','FontWeight','bold');
-annotation('textbox',[a(1:2)+([0.39 0.745].*a(3:4)) [0.08 0.06]],'String',{'CA4&DG'},'LineStyle','none','FontWeight','bold');
+annotation('textbox',[a(1:2)+([0.45 0.35].*a(3:4)) [0.08 0.06]],'String',{'CA1'},'LineStyle','none','FontWeight','bold');
+annotation('textbox',[a(1:2)+([0.45 0.60].*a(3:4)) [0.08 0.06]],'String',{'CA2'},'LineStyle','none','FontWeight','bold');
+annotation('textbox',[a(1:2)+([0.45 0.72].*a(3:4)) [0.08 0.06]],'String',{'CA3'},'LineStyle','none','FontWeight','bold');
+annotation('textbox',[a(1:2)+([0.43 0.82].*a(3:4)) [0.08 0.06]],'String',{'CA4&DG'},'LineStyle','none','FontWeight','bold');
 
-annotation('textbox',[a(1:2)+([0.8 -0.2].*a(3:4)) [0.08 0.06]],'String',{'tail'},'LineStyle','none');
-annotation('textbox',[a(1:2)+([0.48 -0.2].*a(3:4)) [0.08 0.06]],'String',{'body'},'LineStyle','none');
-annotation('textbox',[a(1:2)+([0.17 -0.2].*a(3:4)) [0.08 0.06]],'String',{'head'},'LineStyle','none');
-annotation('textbox',[a(1:2)+([0.0 -0.2].*a(3:4)) [0.08 0.06]],'String',{'uncus'},'LineStyle','none');
-annotation('textbox',[a(1:2)+([-0.05 -0.1].*a(3:4)) [0.08 0.06]],'String',{sprintf('vert.\nunc.')},'LineStyle','none');
+annotation('textbox',[a(1:2)+([0.8 -0.10].*a(3:4)) [0.08 0.06]],'String',{'tail'},'LineStyle','none');
+annotation('textbox',[a(1:2)+([0.50 -0.10].*a(3:4)) [0.08 0.06]],'String',{'body'},'LineStyle','none');
+annotation('textbox',[a(1:2)+([0.24 -0.10].*a(3:4)) [0.08 0.06]],'String',{'head'},'LineStyle','none');
+annotation('textbox',[a(1:2)+([0.10 -0.10].*a(3:4)) [0.08 0.06]],'String',{'uncus'},'LineStyle','none');
+annotation('textbox',[a(1:2)+([0.03 -0.00].*a(3:4)) [0.08 0.06]],'String',{sprintf('vert.\nunc.')},'LineStyle','none');
 
 end

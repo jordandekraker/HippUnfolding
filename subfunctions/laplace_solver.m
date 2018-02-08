@@ -89,3 +89,5 @@ end
 %% Now solve Laplace using (insulated) interative averaging filter
 init(isnan(init)) = 0.5; %guess if there are still any nans! (e.g. from init)
 [LP,iter_change] = laplace_iters_mex(fg, source, sink, init, maxiters, sz);
+LP = LP(fg);
+end

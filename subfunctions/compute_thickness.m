@@ -51,15 +51,15 @@ labelmap(dil_DB) = 2;
 SRLMcoveredSub_labelmap = labelmap;
 
 %% thicknesses Laplacian
-Laplace_thickness = labelmap; %initialize
+Laplace_thickness = zeros(size(labelmap)); %initialize
 
 % Define ROIs
 source=(labelmap==2 | labelmap==4 | labelmap==21); %SRLM/cyst/medialEdgeOfUncus
 sink=(labelmap==0); %clear label
 fg=(labelmap==1); %Greymatter
 
-[Laplace_thickness,~] = laplace_solver(fg,source,sink,maxiters);
-
+[Laplace_IO,~] = laplace_solver(fg,source,sink,maxiters);
+Laplace_thickness(fg) = Laplace_IO; % switching back to 3D because too lazy to update next section for indexed
 %% compute streamlines across gradient
 
 %start points:  voxels bordering SRLM
@@ -98,5 +98,5 @@ for i = 1:length(streams)
         absolute_thickness(sx(i),sy(i),sz(i)) = nan;
     end
 end
-
+Laplace_thickness = Laplace_thickness(fg); %back to indexed
 end
