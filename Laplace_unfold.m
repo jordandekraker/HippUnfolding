@@ -22,7 +22,7 @@ tic;
 
 % load manual segmentation
 orig_labelmap = load_untouch_nii(fn);
-fn_noFT = fn(1:end-7);
+fn_noFT = fn(1:strfind(fn,'.nii')-1);
 mkdir(sprintf('%s_Unfolded',fn_noFT));
 
 
@@ -39,7 +39,6 @@ isleft = mean(z) > size(orig_labelmap.img,3)/2;
 if isleft
     labelmap = flipdim(labelmap,3); %flip on z (i.e. sagittally)
 end
-orig_labelmap.img = []; %save memory
 sz = size(labelmap);
 %% AP gradient:
 
@@ -130,7 +129,6 @@ clearvars -except cropping fn fn_noFT Laplace_AP Laplace_PD Laplace_IO Thickness
 
 save(sprintf('%s_Unfolded/data',fn_noFT));
 
-orig_labelmap.img = zeros(sz);
 out = zeros(sz); out(idxgm) = ceil(Laplace_AP*20);
 if isleft
     out = flipdim(out,3); %flip on z (i.e. sagittally)
@@ -138,7 +136,6 @@ end
 orig_labelmap.img(cropping==1) = out;
 save_untouch_nii(orig_labelmap,sprintf('%s_Unfolded/laplace_AP.nii.gz',fn_noFT));
 
-orig_labelmap.img = zeros(sz);
 out = zeros(sz); out(idxgm) = ceil(Laplace_PD*20);
 if isleft
     out = flipdim(out,3); %flip on z (i.e. sagittally)
@@ -146,7 +143,6 @@ end
 orig_labelmap.img(cropping==1) = out;
 save_untouch_nii(orig_labelmap,sprintf('%s_Unfolded/laplace_PD.nii.gz',fn_noFT));
 
-orig_labelmap.img = zeros(sz);
 out = zeros(sz); out(idxgm) = ceil(Laplace_IO*10);
 if isleft
     out = flipdim(out,3); %flip on z (i.e. sagittally)
