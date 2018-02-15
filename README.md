@@ -7,7 +7,7 @@ Before using, MEX the laplace_iters.m file (new filename laplace_iters_mex). Dep
 Test it out on the example data using the command:
 Laplace_unfold('example/EPI_V073.segmentation.rHPC.nii.gz')
 
-You should be able to view binned nifty images for each gradient in the output folder. If using ITKsnap, open the labelviewer and go Actions > Import Label Descriptions > select 'dependencies/itksnapLabelDescription_Jet20.txt' to apply a 'jet' colorscheme. 
+You should be able to view binned nifty images for each gradient in the output folder. If using ITKsnap, open the labelviewer and go Actions > Import Label Descriptions > select 'dependencies/itksnapLabelDescription_Jet20.txt' to apply a 'jet' colorscheme.
 
 View the T1overT2 MR image in unfolded space using the example below:
 plot_UnfoldedSpace('example/EPI_V073.segmentation.rHPC_Unfolded', 'example/EPI_V073.T1overT2.cropped.nii.gz')
