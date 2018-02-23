@@ -1,0 +1,161 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration build-checksum="2388641896" file="/home/jordandekraker/matlab/Laplace_unfolding/MCC/HippUnfold.prj" location="/home/jordandekraker/matlab/Laplace_unfolding/MCC" name="HippUnfold" preferred-package-location="/home/jordandekraker/matlab/Laplace_unfolding/MCC/HippUnfold/for_redistribution" preferred-package-type="package.type.install" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>HippUnfold</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>1.0</param.version>
+    <param.authnamewatermark>Jordan DeKraker</param.authnamewatermark>
+    <param.email>jordandekraker@gmail.com</param.email>
+    <param.company />
+    <param.summary>Unfolding of the hippocampus in 3D using Laplace's equation</param.summary>
+    <param.description>Performs unfolded on a segmentation image of the hippocampus. Surrounding structures are used as boundary conditions. For details see reference:
+
+DeKraker, J., Ferko, K. M., Lau, J. C., Köhler, S., &amp; Khan, A. R. (2018). Unfolding the hippocampus: An intrinsic coordinate system for subfield segmentations and quantitative mapping. NeuroImage, 167, 408-418.</param.description>
+    <param.screenshot />
+    <param.guid />
+    <param.installpath.string>/HippUnfold/</param.installpath.string>
+    <param.installpath.combo>option.installpath.user</param.installpath.combo>
+    <param.logo />
+    <param.install.notes>In the following directions, replace MCR_ROOT by the directory where the MATLAB Runtime is installed on the target machine.
+
+(1) Set the environment variable XAPPLRESDIR to this value:
+
+    MCR_ROOT/v92/X11/app-defaults
+
+
+(2) If the environment variable LD_LIBRARY_PATH is undefined, set it to the concatenation of the following strings:
+
+    MCR_ROOT/v92/runtime/glnxa64:
+    MCR_ROOT/v92/bin/glnxa64:
+    MCR_ROOT/v92/sys/os/glnxa64:
+    MCR_ROOT/v92/sys/opengl/lib/glnxa64
+
+    If it is defined, set it to the concatenation of these strings:
+
+    ${LD_LIBRARY_PATH}: 
+    MCR_ROOT/v92/runtime/glnxa64:
+    MCR_ROOT/v92/bin/glnxa64:
+    MCR_ROOT/v92/sys/os/glnxa64:
+    MCR_ROOT/v92/sys/opengl/lib/glnxa64</param.install.notes>
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}/HippUnfold/for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}/HippUnfold/for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}/HippUnfold/for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}/HippUnfold</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>false</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.company />
+      <param.screenshot />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.target.type />
+      <param.support.packages />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+    </unset>
+    <fileset.main>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/Laplace_unfold.m</file>
+    </fileset.main>
+    <fileset.resources />
+    <fileset.package />
+    <fileset.depfun>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/Nifti_tools/load_nii.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/Nifti_tools/load_nii_hdr.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/Nifti_tools/load_nii_img.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/Nifti_tools/save_nii.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/Nifti_tools/save_nii_ext.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/Nifti_tools/save_nii_hdr.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/Nifti_tools/verify_nii_ext.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/Nifti_tools/xform_nii.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/automatic_DGgcl_approximation.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/extend_SRLM.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/laplace_iters.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/laplace_orthogonalize.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/laplace_solver.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/toolbox_fast_marching/toolbox_fast_marching/perform_fast_marching.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/toolbox_fast_marching/toolbox_fast_marching/perform_front_propagation_2d.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/toolbox_fast_marching/toolbox_fast_marching/perform_front_propagation_2d.mexa64</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/toolbox_fast_marching/toolbox_fast_marching/perform_front_propagation_2d_slow.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/toolbox_fast_marching/toolbox_fast_marching/perform_front_propagation_3d.mexa64</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/toolbox_fast_marching/toolbox_fast_marching/toolbox/getoptions.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/toolbox_fast_marching/toolbox_fast_marching/toolbox/nb_dims.m</file>
+      <file>/home/jordandekraker/matlab/Laplace_unfolding/matlab_src/dependencies/unfolding_visualize.m</file>
+    </fileset.depfun>
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}/HippUnfold/for_testing" name="HippUnfold" optional="false">/home/jordandekraker/matlab/Laplace_unfolding/MCC/HippUnfold/for_testing/HippUnfold</file>
+      <file location="${PROJECT_ROOT}/HippUnfold/for_testing" name="splash.png" optional="false">/home/jordandekraker/matlab/Laplace_unfolding/MCC/HippUnfold/for_testing/splash.png</file>
+      <file location="${PROJECT_ROOT}/HippUnfold/for_testing" name="run_HippUnfold.sh" optional="false">/home/jordandekraker/matlab/Laplace_unfolding/MCC/HippUnfold/for_testing/run_HippUnfold.sh</file>
+      <file location="${PROJECT_ROOT}/HippUnfold/for_testing" name="readme.txt" optional="true">/home/jordandekraker/matlab/Laplace_unfolding/MCC/HippUnfold/for_testing/readme.txt</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>/usr/local/MATLAB/R2017a</root>
+      <toolboxes>
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabcoder" />
+        <toolbox name="embeddedcoder" />
+      </toolboxes>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>false</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>true</linux>
+      <solaris>false</solaris>
+      <osver>4.4.0-116-generic</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>glnxa64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

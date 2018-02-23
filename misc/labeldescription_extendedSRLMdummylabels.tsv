@@ -1,0 +1,12 @@
+value	boundary	label
+0	IOsink	clear
+1	domain	hippocampal grey matter
+2	IOsource	SRLM
+3	domain	DGgcl
+4	IOsource	cyst
+5	APsource	HATA
+6	APsink	IndGris
+7	PDsource	MTLc
+8	IOsink	amygdala (defined very roughly here)
+9	IOsource	(dummy label) SRLM over vert. unc.
+10	IOsource	(dummy label) SRLM over subiculum
