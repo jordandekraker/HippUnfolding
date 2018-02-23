@@ -8,8 +8,8 @@ Test it out in MATLAB on the example data using the command from the /Laplace_un
 >> Laplace_unfold('example/manual_masks/sub-073/anat/sub-073_T2w_space-T1w_hemi-R_label-HippUnfold_roi.nii.gz','example/HippUnfold');
 
 or from terminal (using MATLAB runtime compiler) using:
->> MCC/HippUnfold/for_redistribution_files_only/run_HippUnfold.sh /usr/local/MATLAB/MATLAB_Runtime/v92 'example/manual_masks/sub-073/anat/sub-073_T2w_space-T1w_hemi-R_label-HippUnfold_roi.nii.gz' 'example/HippUnfold',
-where </usr/local/MATLAB/MATLAB_Runtime/v92> is replaced by your local MATLAB_Runtime installation (free to download without MATLAB lisence).
+>> MCC/HippUnfold/for_redistribution_files_only/run_HippUnfold.sh /usr/local/MATLAB/MATLAB_Runtime/v92 'example/manual_masks/sub-073/anat/sub-073_T2w_space-T1w_hemi-R_label-HippUnfold_roi.nii.gz' 'example/HippUnfold'
+, where </usr/local/MATLAB/MATLAB_Runtime/v92> is replaced by your local MATLAB_Runtime installation (free to download without MATLAB lisence).
 
 If a T2w image is in the BIDS sourcedata directory, this will open a matlab window displaying each hippocampal voxels' T2 weight in native and unfolded space. Otherwise, you should be able to view binned nifty images for each gradient in the output folder. 
 If using ITKsnap, apply a 'jet' colorscheme for better visualization by opening the labelviewer and go Actions > Import Label Descriptions > select 'misc/itksnapLabelDescription_Jet20.txt'. Non-binned gradients and other variables of interest will be stored in the _data.mat file.
