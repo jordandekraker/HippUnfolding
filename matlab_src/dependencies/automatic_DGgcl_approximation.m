@@ -7,6 +7,9 @@
 % this is used to define the sink (approximately the DG granule cell layer, or
 % most distal ~10% of the fast march)
 
+domainlbl = labeldescription.Var2(contains(cellstr(labeldescription.Var1),'domain'));
+% note: should only be 1 label if DG is not already present
+
 vertunc = zeros(sz);
 vertunc(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var3),'vert. unc.')))) = 1;
 
@@ -37,7 +40,10 @@ end
 % dilate dark band (or cyst) over distal parts of geodist_PD to get only
 % approximate granule cell layer
 se = ones(3,3,3);
-sink_main = (imdilate((labelmap==2 | labelmap == 4),se) & Geodist_PD>=0.9); %last ~12% of geodist is DG
+SRLMorCystlabels = labeldescription.Var2(contains(cellstr(labeldescription.Var3),'SRLM')...
+        | contains(cellstr(labeldescription.Var3),'cyst'));
+SRLMorCyst = ismember(labelmap,SRLMorCystlabels);
+sink_main = (imdilate(SRLMorCyst,se) & Geodist_PD>=0.9); %last ~10% of geodist is DG
 
 
 % now find where DG passes through the vertical component of the uncus.
@@ -47,6 +53,6 @@ sf = zeros(3,3,3); sf(2,:,:) = 1; sf(:,2,:) = 1; sf (:,:,2) = 1;
 
 sink_unc = false(sz);
 hold = false(sz);
-hold(imdilate(labelmap==1,sf) & imdilate(vertunc,sf) & labelmap==0) = 1; % intersection of all 3 labels
-sink_unc(imdilate(hold==1,se) & labelmap==1) = 1; %where that overlaps greymatter
+hold(imdilate(labelmap==domainlbl,sf) & imdilate(vertunc,sf) & labelmap==0) = 1; % intersection of all 3 labels
+sink_unc(imdilate(hold==1,se) & labelmap==domainlbl) = 1; %where that overlaps greymatter
 sink_unc(hold==1) = false;

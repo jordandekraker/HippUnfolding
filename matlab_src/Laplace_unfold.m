@@ -51,6 +51,7 @@ cropping = false(size(origheader.img)); %initialize
 cropping(min(x)-1:max(x)+1,min(y)-1:max(y)+1,min(z)-1:max(z)+1) = true;
 labelmap = zeros(max(x)-min(x)+3,max(y)-min(y)+3,max(z)-min(z)+3); %+3 because 2 come from expanding min and max domain by 1;
 labelmap(:) = origheader.img(cropping==1);
+origsz = size(origheader.img);
 origheader.img = [];
 
 % if left hippocampus, flip
@@ -76,13 +77,16 @@ Laplace_AP = laplace_solver(idxgm,sourceAP,sinkAP,50,[],sz);
 
 % Define ROIs for Laplacian
 sourcePD = find(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var1),'PDsource'))));
-if strmatch(labeldescription_fn, 'misc/labeldescription_extendedSRLMdummylabels.tsv') ==1
-    sinkPD = find(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var1),'PDsink'))));
-else
+sinkPD = find(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var1),'PDsink'))));
+% check if SRLM covers subiculum
+
+if ~labeldescription.Var2(contains(cellstr(labeldescription.Var3),'SRLM')...
+        & contains(cellstr(labeldescription.Var3),'dummy label'))
+    extend_SRLM; %note: extended SRLM label number is 44
+end
+if isempty(sinkPD)
     %have to make these dummy labels ourselves
-    extend_SRLM; 
     automatic_DGgcl_approximation; %note: has to be run after Laplace_AP
-    
     sinkPD=find(sink_main | sink_unc); %DGgcl
 end
 
@@ -90,7 +94,7 @@ Laplace_PD = laplace_solver(idxgm,sourcePD,sinkPD,50,[],sz);
 
 %% Laminar gradient
 % compute thicknesses
-sourceIO = find(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var1),'IOsource'))));
+sourceIO = find(ismember(labelmap,[44;labeldescription.Var2(contains(cellstr(labeldescription.Var1),'IOsource'))]));
 sinkIO = find(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var1),'IOsink'))));
 
 Laplace_IO = laplace_solver(idxgm,sourceIO,sinkIO,50,[],sz);
@@ -112,7 +116,9 @@ sprintf('removing %d bad voxels; sometimes happens due to islands in manual seg'
 Laplace_AP(bad) = []; Laplace_PD(bad) = []; Laplace_IO(bad) = []; idxgm(bad) = [];
 
 %% binned niftis for visualization
+origheader.img = zeros(origsz);
 out = zeros(sz); 
+
 out(idxgm) = ceil(Laplace_AP*20);
 out(sinkAP) = 50;
 out(sourceAP) = 51;
@@ -122,7 +128,6 @@ end
 origheader.img(cropping==1) = out;
 save_nii(origheader,[output '_srcsnk-AP_PhiMap.nii.gz']);
 
-out = zeros(sz); 
 out(idxgm) = ceil(Laplace_PD*20);
 out(sinkPD) = 50;
 out(sourcePD) = 51;
@@ -132,8 +137,7 @@ end
 origheader.img(cropping==1) = out;
 save_nii(origheader,[output '_srcsnk-PD_PhiMap.nii.gz']);
 
-out = zeros(sz); 
-out(idxgm) = ceil(Laplace_IO*10);
+out(idxgm) = ceil(Laplace_IO*4);
 out(sourceIO) = 51;
 if LR=='L'
     out = flipdim(out,1); %flip on x (i.e. sagittally)
@@ -143,7 +147,7 @@ save_nii(origheader,[output '_srcsnk-IO_PhiMap.nii.gz']);
 
 
 %%
-clearvars -except output LR cropping sub origheader idxgm sz Laplace_AP Laplace_PD Laplace_IO sourceAP sinkAP sourcePD sinkPD sourceIO sinkIO;
+clearvars -except origsz output LR cropping sub origheader idxgm sz Laplace_AP Laplace_PD Laplace_IO sourceAP sinkAP sourcePD sinkPD sourceIO sinkIO;
 save([output '_data.mat']);
 
 try
