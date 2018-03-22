@@ -117,8 +117,8 @@ Laplace_AP(bad) = []; Laplace_PD(bad) = []; Laplace_IO(bad) = []; idxgm(bad) = [
 
 %% binned niftis for visualization
 origheader.img = zeros(origsz);
-out = zeros(sz); 
 
+out = zeros(sz); 
 out(idxgm) = ceil(Laplace_AP*20);
 out(sinkAP) = 50;
 out(sourceAP) = 51;
@@ -128,6 +128,7 @@ end
 origheader.img(cropping==1) = out;
 save_nii(origheader,[output '_srcsnk-AP_PhiMap.nii.gz']);
 
+out = zeros(sz); 
 out(idxgm) = ceil(Laplace_PD*20);
 out(sinkPD) = 50;
 out(sourcePD) = 51;
@@ -137,6 +138,7 @@ end
 origheader.img(cropping==1) = out;
 save_nii(origheader,[output '_srcsnk-PD_PhiMap.nii.gz']);
 
+out = zeros(sz); 
 out(idxgm) = ceil(Laplace_IO*4);
 out(sourceIO) = 51;
 if LR=='L'
