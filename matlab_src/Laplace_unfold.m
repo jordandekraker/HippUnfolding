@@ -1,4 +1,4 @@
-function out = Laplace_unfold(labelmap_fn,outdir,labeldescription_fn)
+function out = Laplace_unfold(labelmap_fn,outdir,labeldescription_fn,binned_outputs)
 % performs laplacian unfolding on the image of manually labelled structures
 
 % labeldescription filename can be ==1 if dentate gyrus and SRLM extended
@@ -11,6 +11,9 @@ function out = Laplace_unfold(labelmap_fn,outdir,labeldescription_fn)
 % data.mat file containing all the variables of interest and the actual Laplace
 % gradients.
 
+if exist('binned_outputs') ~= 1
+    binned_outputs = 1;
+end
 %% get output filename
 subs = strfind(labelmap_fn,'sub');
 subs = subs(1);
@@ -19,7 +22,7 @@ subf = subf(1)+subs-2;
 sub = labelmap_fn(subs:subf);
 fnf = strfind(labelmap_fn,'/')+1;
 fn = labelmap_fn(fnf(end):strfind(labelmap_fn,'.nii')-1);
-try
+if strfind(labelmap_fn,'_roi.nii') >0
 fn = labelmap_fn(fnf(end):strfind(labelmap_fn,'_roi.nii')-1);
 end
 output = [outdir '/' sub '/anat/' fn];
@@ -62,6 +65,7 @@ end
 
 sz = size(labelmap);
 idxgm = find(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var1),'domain'))));
+
 %note this is the domain for each gradient
 
 %% AP gradient:
@@ -116,6 +120,8 @@ sprintf('removing %d bad voxels; sometimes happens due to islands in manual seg'
 Laplace_AP(bad) = []; Laplace_PD(bad) = []; Laplace_IO(bad) = []; idxgm(bad) = [];
 
 %% binned niftis for visualization
+if binned_outputs==1
+    
 origheader.img = zeros(origsz);
 
 out = zeros(sz); 
@@ -146,7 +152,7 @@ if LR=='L'
 end
 origheader.img(cropping==1) = out;
 save_nii(origheader,[output '_srcsnk-IO_PhiMap.nii.gz']);
-
+end
 
 %%
 clearvars -except origsz output LR cropping sub origheader idxgm sz Laplace_AP Laplace_PD Laplace_IO sourceAP sinkAP sourcePD sinkPD sourceIO sinkIO;

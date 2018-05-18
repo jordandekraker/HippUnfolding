@@ -2,7 +2,7 @@ value	boundary	label
 0	IOsink	clear
 1	domain	hippocampal grey matter
 2	IOsource	SRLM
-3	domain	DGgcl
+3	PDsink	DGgcl
 4	IOsource	cyst
 5	APsource	HATA
 6	APsink	IndGris
