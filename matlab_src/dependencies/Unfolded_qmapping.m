@@ -20,24 +20,24 @@ p3 = strfind(qfilenames, 'T2w');
 p3 = find(~cellfun('isempty', p3));
 
 if ~isempty(p1) %load first T1map available
-    map = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p1(1)}]);
-    map = map.img; 
+    modality = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p1(1)}]);
+    modality = modality.img; 
     mapModality = 'T1map';
 elseif ~isempty(p2) && ~isempty(p3) %T1w/T2w
     map1 = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p2(1)}]);
     map2 = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p3(1)}]);
-    map = map1.img./map2.img; clear map1 map2
+    modality = map1.img./map2.img; clear map1 map2
     mapModality = 'T1w/T2w';
 elseif ~isempty(p3) %just take T1w
-    map = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p2(1)}]);
-    map = map.img;
+    modality = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p2(1)}]);
+    modality = modality.img;
     mapModality = 'T1w';
 end
 
 %% sample in same spaces
 
 MRdata = zeros(sz);
-MRdata(:) = map(cropping==1); clear map
+MRdata(:) = modality(cropping==1); clear map
 if LR=='L'
     MRdata = flipdim(MRdata,1);
 end
@@ -54,12 +54,15 @@ flatmap = inpaintn(flatmap); % this should be done in 3D
 flatmap = mean(flatmap,3);
 flatmap = imfilter(flatmap,smoothKernel,'symmetric');
 
-% figure;
-% p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',flatmap(:));
-% p.FaceColor = 'interp';
-% p.LineStyle = 'none';
-% axis equal;
-% colormap('jet');
+if suppress_visuals==0
+    figure;
+    p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',flatmap(:));
+    p.FaceColor = 'interp';
+    p.LineStyle = 'none';
+    axis equal;
+    colormap('jet');
+    title([sub 'hemi-' LR ' mean ' mapModality]);
+end
 
 clearvars -except Vuvw Vxyz FV flatmap mapModality LR APres PDres IOres output
 save([output '_qmap.mat']);

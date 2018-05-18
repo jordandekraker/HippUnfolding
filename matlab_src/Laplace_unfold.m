@@ -1,4 +1,4 @@
-function out = Laplace_unfold(manual_masks,output_dir,labeldescription_fn,quantitative_dir,binned_outputs)
+function out = Laplace_unfold(manual_masks,output_dir,labeldescription_fn,quantitative_dir,suppress_visuals)
 % performs laplacian unfolding on the image of manually labelled structures
 % manual_masks: BIDS directory containing manually labelled structures.
 % This should contain the string 'label-HippUnfold'
@@ -7,8 +7,8 @@ function out = Laplace_unfold(manual_masks,output_dir,labeldescription_fn,quanti
 % dummy labels, or specify custom .tsv file (see misc.labeldescription.tsv)
 % quantitative_dir(optional): specify a directory of (registered) nifti
 % images to map in unfolded space
-% binned_outputs(optional): 0 or 1(default) generate binned .nii gradients
-% or not
+% suppress_visuals(optional): 0(default) or 1 generate binned .nii
+% gradients and morphometry/quantitative map figures
 
 if exist('labeldescription_fn') ~= 1
     labeldescription_fn = 1;
@@ -16,8 +16,8 @@ end
 if exist('quantitative_dir') ~= 1
     quantitative_dir = 'CoronalOblique0.3mm';
 end
-if exist('binned_outputs') ~= 1
-    binned_outputs = 1;
+if exist('suppress_visuals') ~= 1
+    suppress_visuals = 0;
 end
 
 %% get output filename
@@ -133,7 +133,7 @@ for s=1:length(subjects)
         Laplace_AP(bad) = []; Laplace_PD(bad) = []; Laplace_IO(bad) = []; idxgm(bad) = [];
         
         %% binned niftis for visualization
-        if binned_outputs==1
+        if suppress_visuals==0
             
             origheader.img = zeros(origsz);
             
@@ -171,7 +171,7 @@ for s=1:length(subjects)
         clearvars -except origsz output LR cropping sub origheader idxgm sz...
             Laplace_AP Laplace_PD Laplace_IO sourceAP sinkAP sourcePD sinkPD...
             sourceIO sinkIO manual_masks output_dir labeldescription_fn...
-            quantitative_dir binned_outputs s subjects f filenames;
+            quantitative_dir suppress_visuals s subjects f filenames;
         save([output '_laplace.mat']);
         
         

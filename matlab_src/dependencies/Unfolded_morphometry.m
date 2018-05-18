@@ -59,12 +59,15 @@ Cmean(isoutlier(Cmean(:),'mean')) = nan;
 Cmean = inpaintn(Cmean);
 Cmean = imfilter(Cmean,smoothKernel,'symmetric');
    
-% figure;
-% p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',Cmean(:));
-% p.FaceColor = 'interp';
-% p.LineStyle = 'none';
-% axis equal;
-% colormap('jet');
+if suppress_visuals==0
+    figure;
+    p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',Cmean(:));
+    p.FaceColor = 'interp';
+    p.LineStyle = 'none';
+    axis equal;
+    colormap('jet');
+    title([sub 'hemi-' LR ' mean curvature']);
+end
 
 %% compute thickness
 
@@ -110,12 +113,15 @@ streamlengths(isoutlier(streamlengths(:),'mean')) = nan;
 streamlengths = inpaintn(streamlengths);
 streamlengths = imfilter(streamlengths,smoothKernel,'symmetric');
 
-% figure;
-% p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',streamlengths(:));
-% p.FaceColor = 'interp';
-% p.LineStyle = 'none';
-% axis equal;
-% colormap('jet');
+if suppress_visuals==0
+figure;
+p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',streamlengths(:));
+p.FaceColor = 'interp';
+p.LineStyle = 'none';
+axis equal;
+colormap('jet');
+title([sub 'hemi-' LR ' thickness']);
+end
 
 clearvars -except Vuvw Vxyz FV Cmean streamlengths LR APres PDres IOres output
 save([output '_morphometry.mat']);
