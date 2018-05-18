@@ -27,7 +27,7 @@ i = strfind(subjects, 'sub-');
 i = cellfun('isempty', i);
 subjects(i) = [];
 
-for s=1:length(subjects)
+parfor s=1:length(subjects)
     sub = subjects{s};
     [~,filenames] = system(['ls ' manual_masks '/' sub '/anat']);
     filenames = strsplit(filenames)';
