@@ -123,5 +123,5 @@ colormap('jet');
 title([sub 'hemi-' LR ' thickness']);
 end
 
-clearvars -except Vuvw Vxyz FV Cmean streamlengths LR APres PDres IOres output
-save([output '_morphometry.mat']);
+save([output '_morphometry.mat'],'Vuvw','Vxyz','FV','Cmean','streamlengths',...
+    'LR','APres','PDres','IOres','output');

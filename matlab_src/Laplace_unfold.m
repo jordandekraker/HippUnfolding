@@ -10,15 +10,27 @@ function out = Laplace_unfold(manual_masks,output_dir,labeldescription_fn,quanti
 % suppress_visuals(optional): 0(default) or 1 generate binned .nii
 % gradients and morphometry/quantitative map figures
 
-if exist('labeldescription_fn') ~= 1
+%% default arguments
+if exist('labeldescription_fn')~=1 || isempty('labeldescription_fn')
     labeldescription_fn = 1;
 end
-if exist('quantitative_dir') ~= 1
+if exist('quantitative_dir')~=1 || isempty('quantitative_dir')
     quantitative_dir = 'CoronalOblique0.3mm';
 end
-if exist('suppress_visuals') ~= 1
+if exist('suppress_visuals')~=1 || isempty('suppress_visuals')
     suppress_visuals = 0;
 end
+
+%% get & format label description file
+if labeldescription_fn==1
+    labeldescription_fn = 'misc/labeldescription_basic.tsv';
+elseif labeldescription_fn==2
+    labeldescription_fn = 'misc/labeldescription_extendedSRLMdummylabels.tsv';
+end
+labeldescription = tdfread(labeldescription_fn);
+labeldescription.label = cellstr(labeldescription.label);
+labeldescription.boundary = cellstr(labeldescription.boundary);
+labeldescription = table(labeldescription.boundary,labeldescription.value,labeldescription.label);
 
 %% get output filename
 subjects = ls(manual_masks);
@@ -26,17 +38,18 @@ subjects = strsplit(subjects)';
 i = strfind(subjects, 'sub-');
 i = cellfun('isempty', i);
 subjects(i) = [];
+subjects = sort(subjects);
 
-parfor s=1:length(subjects)
+for s=1:length(subjects)
     sub = subjects{s};
-    [~,filenames] = system(['ls ' manual_masks '/' sub '/anat']);
-    filenames = strsplit(filenames)';
-    i = strfind(filenames, 'label-HippUnfold');
+    [~,manual_fns] = system(['ls ' manual_masks '/' sub '/anat']);
+    manual_fns = strsplit(manual_fns)';
+    i = strfind(manual_fns, 'label-HippUnfold');
     i = cellfun('isempty', i);
-    filenames(i) = [];
+    manual_fns(i) = [];
     
-    for f=1:length(filenames)
-        fn = filenames{f};
+    for f=1:length(manual_fns)
+        fn = manual_fns{f};
         fn = fn(1:strfind(fn,'.nii')-1);
         try
             fn(strfind(fn,'_roi'):end) = [];
@@ -45,21 +58,9 @@ parfor s=1:length(subjects)
         outd = strfind(output,'/');
         mkdir(output(1:outd(end)));
         
-        
-        %% get & format label description file
-        
-        if labeldescription_fn==1
-            labeldescription_fn = 'misc/labeldescription_basic.tsv';
-        elseif labeldescription_fn==2
-            labeldescription_fn = 'misc/labeldescription_extendedSRLMdummylabels.tsv';
-        end
-        labeldescription = tdfread(labeldescription_fn);
-        labeldescription.label = cellstr(labeldescription.label);
-        labeldescription.boundary = cellstr(labeldescription.boundary);
-        labeldescription = table(labeldescription.boundary,labeldescription.value,labeldescription.label);
-        
+
         %% load & crop manual segmentation
-        origheader = load_nii([manual_masks '/' sub '/anat/' filenames{f}]);
+        origheader = load_nii([manual_masks '/' sub '/anat/' manual_fns{f}]);
         
         % crop around hippocampus by finding min and max in each direction that
         % contain non-zero label, and add one more voxel on each side just in case
@@ -168,18 +169,14 @@ parfor s=1:length(subjects)
         end
         
         %%
-        clearvars -except origsz output LR cropping sub origheader idxgm sz...
-            Laplace_AP Laplace_PD Laplace_IO sourceAP sinkAP sourcePD sinkPD...
-            sourceIO sinkIO manual_masks output_dir labeldescription_fn...
-            quantitative_dir suppress_visuals s subjects f filenames;
-        save([output '_laplace.mat']);
-        
+        save([output '_laplace.mat'],'origsz','output','LR','cropping','sub',...
+            'origheader','idxgm','sz','Laplace_AP','Laplace_PD','Laplace_IO',...
+            'sourceAP','sinkAP','sourcePD','sinkPD','sourceIO','sinkIO',...
+            'manual_masks','output_dir','labeldescription','quantitative_dir',...
+            'manual_fns');
         
         try
             Unfolded_morphometry
-        end
-        load([output '_laplace.mat']);
-        try
             Unfolded_qmapping
         end
     end

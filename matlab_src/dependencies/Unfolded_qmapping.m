@@ -64,5 +64,5 @@ if suppress_visuals==0
     title([sub 'hemi-' LR ' mean ' mapModality]);
 end
 
-clearvars -except Vuvw Vxyz FV flatmap mapModality LR APres PDres IOres output
-save([output '_qmap.mat']);
+save([output '_qmap.mat'],'Vuvw','Vxyz','FV','flatmap','mapModality','LR',...
+    'APres','PDres','IOres','output');
