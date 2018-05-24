@@ -1,7 +1,6 @@
 % parameters to be set
 APres = 256; PDres = 128; IOres = 8;
 %ratio should be aproximately 2:1:(1/32 or 1/16)
-smoothKernel = fspecial('gaussian',[25 25],3);
 
 
 
@@ -52,16 +51,20 @@ FV.vertices = [x2(:) y2(:) z2(:)];
 FV.faces = F;
 warning('off');
 Cmean = patchcurvature(FV);%, true);
+Cmean = real(Cmean);
 warning('on');
 
 Cmean = reshape(Cmean,[APres+1,PDres+1]);
-Cmean(isoutlier(Cmean(:),'mean')) = nan;
-Cmean = inpaintn(Cmean);
-Cmean = imfilter(Cmean,smoothKernel,'symmetric');
-   
+
 if suppress_visuals==0
+    tmp = Cmean;
+    smoothKernel = fspecial('gaussian',[25 25],3);
+    tmp(isoutlier(tmp(:),'mean')) = nan;
+    tmp = inpaintn(tmp);
+    tmp = imfilter(tmp,smoothKernel,'symmetric');
+
     figure;
-    p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',Cmean(:));
+    p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',tmp(:));
     p.FaceColor = 'interp';
     p.LineStyle = 'none';
     axis equal;
@@ -109,18 +112,21 @@ bad = find(streamlengths>=threshold(2) | streamlengths<=threshold(1));
 streamlengths(bad) = nan;
 
 streamlengths = reshape(streamlengths,[APres+1,PDres+1]);
-streamlengths(isoutlier(streamlengths(:),'mean')) = nan;
-streamlengths = inpaintn(streamlengths);
-streamlengths = imfilter(streamlengths,smoothKernel,'symmetric');
 
 if suppress_visuals==0
-figure;
-p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',streamlengths(:));
-p.FaceColor = 'interp';
-p.LineStyle = 'none';
-axis equal;
-colormap('jet');
-title([sub 'hemi-' LR ' thickness']);
+    tmp = streamlengths;
+    smoothKernel = fspecial('gaussian',[25 25],3);
+    tmp(isoutlier(tmp(:),'mean')) = nan;
+    tmp = inpaintn(tmp);
+    tmp = imfilter(tmp,smoothKernel,'symmetric');
+
+    figure;
+    p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',tmp(:));
+    p.FaceColor = 'interp';
+    p.LineStyle = 'none';
+    axis equal;
+    colormap('jet');
+    title([sub 'hemi-' LR ' thickness']);
 end
 
 save([output '_morphometry.mat'],'Vuvw','Vxyz','FV','Cmean','streamlengths',...

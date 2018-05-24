@@ -1,7 +1,5 @@
 % tries to choose modalities to flatmap in this order: T1map > T1w/T2w > T1w
 
-smoothKernel = fspecial('gaussian',[25 25],3);
-
 
 
 %% prioritize from available modalities
@@ -49,14 +47,18 @@ flatmap = MRdata(inds);
 flatmap(bad) = nan;
 
 flatmap = reshape(flatmap,[(APres+1),(PDres+1),(IOres+1)]);
-flatmap = inpaintn(flatmap); % this should be done in 3D
-% average across laminae
-flatmap = mean(flatmap,3);
-flatmap = imfilter(flatmap,smoothKernel,'symmetric');
 
 if suppress_visuals==0
+    tmp = flatmap;
+    tmp(isoutlier(tmp(:),'mean')) = nan;
+    tmp = inpaintn(tmp); % this should be done in 3D
+    tmp = mean(tmp,3);
+    smoothKernel = fspecial('gaussian',[25 25],3);
+    tmp = inpaintn(tmp);
+    tmp = imfilter(tmp,smoothKernel,'symmetric');
+    
     figure;
-    p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',flatmap(:));
+    p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',tmp(:));
     p.FaceColor = 'interp';
     p.LineStyle = 'none';
     axis equal;
