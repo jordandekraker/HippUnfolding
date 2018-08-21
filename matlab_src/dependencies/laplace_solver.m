@@ -35,6 +35,7 @@ end
 if exist('init') == 1 %exists
     if length(size(init)) == 3 %is 3D
         sz2 = size(init);
+        init = init(fg);
     end
 end
 
