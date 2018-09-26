@@ -53,6 +53,6 @@ sf = zeros(3,3,3); sf(2,:,:) = 1; sf(:,2,:) = 1; sf (:,:,2) = 1;
 
 sink_unc = false(sz);
 hold = false(sz);
-hold(imdilate(labelmap==domainlbl,sf) & imdilate(vertunc,sf) & labelmap==0) = 1; % intersection of all 3 labels
+hold(imdilate(Geodist_PD>0.5,sf) & imdilate(vertunc,sf) & labelmap==0) = 1; % intersection of all 3 labels
 sink_unc(imdilate(hold==1,se) & labelmap==domainlbl) = 1; %where that overlaps greymatter
 sink_unc(hold==1) = false;

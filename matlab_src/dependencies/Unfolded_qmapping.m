@@ -61,7 +61,7 @@ if suppress_visuals==0
     p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',tmp(:));
     p.FaceColor = 'interp';
     p.LineStyle = 'none';
-    axis equal;
+    axis equal tight;
     colormap('jet');
     title([sub 'hemi-' LR ' mean ' mapModality]);
 end

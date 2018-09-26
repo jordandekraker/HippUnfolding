@@ -1,4 +1,4 @@
-function out = Laplace_unfold(manual_masks,output_dir,labeldescription_fn,quantitative_dir,suppress_visuals)
+function out = Laplace_unfold(manual_masks,output_dir,labeldescription_fn,quantitative_dir,suppress_visuals,quantitative_morphometry_analyses)
 % performs laplacian unfolding on the image of manually labelled structures
 % manual_masks: BIDS directory containing manually labelled structures.
 % This should contain the string 'label-HippUnfold'
@@ -19,6 +19,9 @@ if exist('quantitative_dir')~=1 || isempty('quantitative_dir')
 end
 if exist('suppress_visuals')~=1 || isempty('suppress_visuals')
     suppress_visuals = 0;
+end
+if exist('quantitative_morphometry_analyses')~=1 || isempty('suppress_visuals')
+    suppress_visuals = 1;
 end
 
 %% get & format label description file
@@ -174,10 +177,11 @@ for s=1:length(subjects)
             'sourceAP','sinkAP','sourcePD','sinkPD','sourceIO','sinkIO',...
             'manual_masks','output_dir','labeldescription','quantitative_dir',...
             'manual_fns');
-        
-        try
-            Unfolded_morphometry
-            Unfolded_qmapping
+        if quantitative_morphometry_analyses == 1
+            try
+                Unfolded_morphometry
+                Unfolded_qmapping
+            end
         end
     end
 end
