@@ -20,8 +20,8 @@ end
 if exist('suppress_visuals')~=1 || isempty('suppress_visuals')
     suppress_visuals = 0;
 end
-if exist('quantitative_morphometry_analyses')~=1 || isempty('suppress_visuals')
-    suppress_visuals = 1;
+if exist('quantitative_morphometry_analyses')~=1 || isempty('quantitative_morphometry_analyses')
+    quantitative_morphometry_analyses = 1;
 end
 
 %% get & format label description file
