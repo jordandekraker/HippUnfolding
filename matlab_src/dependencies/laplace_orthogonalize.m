@@ -1,8 +1,6 @@
 SRLM3d = zeros(sz);
 SRLM3d(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var3),'SRLM')))) = 1;
 
-
-bad = find(isnan(Laplace_AP) | isnan(Laplace_PD) | isnan(Laplace_IO) | isnan(idxgm));
 Laplace_AP(bad) = []; Laplace_PD(bad) = []; Laplace_IO(bad) = []; idxgm(bad) = [];
 
 edges = boundary(Laplace_AP,Laplace_PD,0.8);
@@ -15,7 +13,7 @@ PDsink3d = zeros(sz); PDsink3d(sinkPD) = 1;
 idxgm3d = zeros(sz); idxgm3d(idxgm) = 1;
 
 hl=ones(3,3,3);
-edges3d = (imdilate(edges3d==1,hl) & ~idxgm3d & ~SRLM3d) |APsource3d|APsink3d|PDsource3d|PDsink3d;
+edges3d = (imdilate(edges3d==1,hl) & labelmap==0) |APsource3d|APsink3d|PDsource3d|PDsink3d;
 
 for n = 1:5 % AP/PD boundaries will push eachother back and forth for n iterations, ensuring they contact each other
     PDsource3d = imdilate(PDsource3d==1,hl) & edges3d;

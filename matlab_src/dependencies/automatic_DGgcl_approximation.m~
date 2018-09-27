@@ -52,4 +52,5 @@ sink_main = (imdilate(SRLMorCyst,se) & Geodist_PD>=0.9); %last ~10% of geodist i
 sf = zeros(3,3,3); sf(2,:,:) = 1; sf(:,2,:) = 1; sf (:,:,2) = 1;
 
 sink_unc = false(sz);
-sink_unc(imdilate(labelmap==0,se) & imdilate(vertunc,se) & Geodist_PD>0.5) = 1; % intersection of all 3 labels
+sink_unc(imdilate(labelmap==domainlbl,sf) & imdilate(vertunc,sf) & labelmap==0) = 1; % intersection of all 3 labels
+sink_unc(imdilate(hold==1,se) & Geodist_PD>0.5 & labelmap==domainlbl) = 1; %where that overlaps greymatter

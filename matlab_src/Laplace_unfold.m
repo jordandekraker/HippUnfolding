@@ -63,16 +63,16 @@ for s=1:length(subjects)
         
 
         %% load & crop manual segmentation
-        origheader = load_nii([manual_masks '/' sub '/anat/' manual_fns{f}]);
+        origheader = load_untouch_nii([manual_masks '/' sub '/anat/' manual_fns{f}]);
         
         % crop around hippocampus by finding min and max in each direction that
         % contain non-zero label, and add one more voxel on each side just in case
-        [x,y,z] = ind2sub(size(origheader.img),find(origheader.img>0));
-        cropping = false(size(origheader.img)); %initialize
+        origsz = size(origheader.img);
+        [x,y,z] = ind2sub(origsz,find(origheader.img>0));
+        cropping = false(origsz); %initialize
         cropping(min(x)-1:max(x)+1,min(y)-1:max(y)+1,min(z)-1:max(z)+1) = true;
         labelmap = zeros(max(x)-min(x)+3,max(y)-min(y)+3,max(z)-min(z)+3); %+3 because 2 come from expanding min and max domain by 1;
         labelmap(:) = origheader.img(cropping==1);
-        origsz = size(origheader.img);
         origheader.img = [];
         
         % if left hippocampus, flip
@@ -124,7 +124,8 @@ for s=1:length(subjects)
         % gets the current edges of unfolded space, and then adjusts the boundary
         % conditions for the AP and PD gradients such that they always meet, making
         % them closer to orthogonal at the edges
-        laplace_orthogonalize;
+        bad = find(isnan(Laplace_AP) | isnan(Laplace_PD) | isnan(Laplace_IO) | isnan(idxgm));
+%         laplace_orthogonalize; this seems to work poorly on low-res data...
         
         %% solve again, using more iters and with orthogonalized boundary conditions
         Laplace_AP = laplace_solver(idxgm,sourceAP,sinkAP,1000,Laplace_AP,sz);
@@ -149,7 +150,7 @@ for s=1:length(subjects)
                 out = flipdim(out,1); %flip on x (i.e. sagittally)
             end
             origheader.img(cropping==1) = out;
-            save_nii(origheader,[output '_srcsnk-AP_PhiMap.nii.gz']);
+            save_untouch_nii(origheader,[output '_srcsnk-AP_PhiMap.nii.gz']);
             
             out = zeros(sz);
             out(idxgm) = ceil(Laplace_PD*20);
@@ -159,7 +160,7 @@ for s=1:length(subjects)
                 out = flipdim(out,1); %flip on x (i.e. sagittally)
             end
             origheader.img(cropping==1) = out;
-            save_nii(origheader,[output '_srcsnk-PD_PhiMap.nii.gz']);
+            save_untouch_nii(origheader,[output '_srcsnk-PD_PhiMap.nii.gz']);
             
             out = zeros(sz);
             out(idxgm) = ceil(Laplace_IO*4);
@@ -168,7 +169,7 @@ for s=1:length(subjects)
                 out = flipdim(out,1); %flip on x (i.e. sagittally)
             end
             origheader.img(cropping==1) = out;
-            save_nii(origheader,[output '_srcsnk-IO_PhiMap.nii.gz']);
+            save_untouch_nii(origheader,[output '_srcsnk-IO_PhiMap.nii.gz']);
         end
         
         %%
