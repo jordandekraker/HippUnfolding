@@ -1,6 +1,7 @@
 SRLM3d = zeros(sz);
 SRLM3d(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var3),'SRLM')))) = 1;
 
+bad = find(isnan(Laplace_AP) | isnan(Laplace_PD) | isnan(Laplace_IO) | isnan(idxgm));
 Laplace_AP(bad) = []; Laplace_PD(bad) = []; Laplace_IO(bad) = []; idxgm(bad) = [];
 
 edges = boundary(Laplace_AP,Laplace_PD,0.8);

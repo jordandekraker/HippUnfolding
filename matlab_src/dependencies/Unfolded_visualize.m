@@ -36,12 +36,9 @@ c(c>thresh(1)) = thresh(1); c(c<thresh(2)) = thresh(2);
 
 interp='linear';
 extrap='none';
-APres = 100;
-PDres = 100;
-thickres = -4;
 Nu=ceil(Laplace_AP*APres);
 Nv=ceil(Laplace_PD*PDres);
-Nw=ceil(Laplace_IO*thickres);
+Nw=ceil(-Laplace_IO*IOres);
 
 
 %% plot!

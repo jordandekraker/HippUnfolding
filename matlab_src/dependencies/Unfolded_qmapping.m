@@ -64,6 +64,8 @@ if suppress_visuals==0
     axis equal tight;
     colormap('jet');
     title([sub 'hemi-' LR ' mean ' mapModality]);
+    
+    drawnow;
 end
 
 save([output '_qmap.mat'],'Vuvw','Vxyz','FV','flatmap','mapModality','LR',...

@@ -1,21 +1,34 @@
-function out = Laplace_unfold(manual_masks,output_dir,labeldescription_fn,quantitative_dir,suppress_visuals,quantitative_morphometry_analyses)
+function out = Laplace_unfold(manual_masks,output_dir,quantitative_dir,labeldescription_fn,suppress_visuals,quantitative_morphometry_analyses)
 % performs laplacian unfolding on the image of manually labelled structures
+%
+% INPUTS:
 % manual_masks: BIDS directory containing manually labelled structures.
 % This should contain the string 'label-HippUnfold'
 % output_dir: BIDS output directory.
-% labeldescription_fn(optional): 1 for basic structures, 2 for extended
-% dummy labels, or specify custom .tsv file (see misc.labeldescription.tsv)
 % quantitative_dir(optional): specify a directory of (registered) nifti
-% images to map in unfolded space
-% suppress_visuals(optional): 0(default) or 1 generate binned .nii
+% images to map in unfolded space (looks for T1map, T1/T2, just T2, or just T1)
+% labeldescription_fn(optional): 1 for basic structures, 2 for extended
+% dummy labels, or specify custom .tsv file (see misc/labeldescription.tsv)
+% suppress_visuals(optional): 0(default) or 1 generate binned .nii and
 % gradients and morphometry/quantitative map figures
 
 %% default arguments
-if exist('labeldescription_fn')~=1 || isempty('labeldescription_fn')
-    labeldescription_fn = 1;
-end
+
+% sampling resolution in each direction
+APres = 128;
+PDres = 64;
+IOres = 4;
+
+%orthogonalization of AP and PD gradients (by adjusting boundary
+%conditions) (causes additional problems on low-res data)
+orthogonalize = false;
+
+%optional arguments
 if exist('quantitative_dir')~=1 || isempty('quantitative_dir')
     quantitative_dir = 'CoronalOblique0.3mm';
+end
+if exist('labeldescription_fn')~=1 || isempty('labeldescription_fn')
+    labeldescription_fn = 1;
 end
 if exist('suppress_visuals')~=1 || isempty('suppress_visuals')
     suppress_visuals = 0;
@@ -75,12 +88,6 @@ for s=1:length(subjects)
         labelmap(:) = origheader.img(cropping==1);
         origheader.img = [];
         
-        % if left hippocampus, flip
-        LR = output(strfind(output,'hemi-')+5);
-        if LR=='L'
-            labelmap = flipdim(labelmap,1); %flip on x (i.e. sagittally)
-        end
-        
         sz = size(labelmap);
         idxgm = find(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var1),'domain'))));
         %note this is the domain for each gradient
@@ -99,22 +106,19 @@ for s=1:length(subjects)
         % Define ROIs for Laplacian
         sourcePD = find(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var1),'PDsource'))));
         sinkPD = find(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var1),'PDsink'))));
-        % check if SRLM covers subiculum
-        
-        if ~labeldescription.Var2(contains(cellstr(labeldescription.Var3),'SRLM')...
-                & contains(cellstr(labeldescription.Var3),'dummy label'))
-            extend_SRLM; %note: extended SRLM label number is 44
-        end
         if isempty(sinkPD)
             %have to make these dummy labels ourselves
             automatic_DGgcl_approximation; %note: has to be run after Laplace_AP
             sinkPD=find(sink_main | sink_unc); %DGgcl
         end
-        
         Laplace_PD = laplace_solver(idxgm,sourcePD,sinkPD,50,[],sz);
         
         %% Laminar gradient
         % compute thicknesses
+                % check if SRLM covers subiculum
+        if ~exist(labeldescription.Var2(contains(cellstr(labeldescription.Var3),'(dummy label) SRLM over subiculum')))
+            extend_SRLM; %note: extended SRLM label number is 44
+        end
         sourceIO = find(ismember(labelmap,[44;labeldescription.Var2(contains(cellstr(labeldescription.Var1),'IOsource'))]));
         sinkIO = find(ismember(labelmap,labeldescription.Var2(contains(cellstr(labeldescription.Var1),'IOsink'))));
         
@@ -124,66 +128,68 @@ for s=1:length(subjects)
         % gets the current edges of unfolded space, and then adjusts the boundary
         % conditions for the AP and PD gradients such that they always meet, making
         % them closer to orthogonal at the edges
-        bad = find(isnan(Laplace_AP) | isnan(Laplace_PD) | isnan(Laplace_IO) | isnan(idxgm));
-%         laplace_orthogonalize; this seems to work poorly on low-res data...
         
-        %% solve again, using more iters and with orthogonalized boundary conditions
+        if orthogonalize
+            laplace_orthogonalize; %this seems to work poorly on low-res data...
+        end
+        % solve again, using more iters and with orthogonalized boundary conditions
         Laplace_AP = laplace_solver(idxgm,sourceAP,sinkAP,1000,Laplace_AP,sz);
         Laplace_PD = laplace_solver(idxgm,sourcePD,sinkPD,1000,Laplace_PD,sz);
         
         %% clean up and save all variables
         
-        bad2 = find(isnan(Laplace_AP) | isnan(Laplace_PD) | isnan(Laplace_IO) | isnan(idxgm));
-        sprintf('removing %d bad voxels; sometimes happens due to islands in manual seg',length([bad;bad2]))
+        bad = find(isnan(Laplace_AP) | isnan(Laplace_PD) | isnan(Laplace_IO) | isnan(idxgm));
+        if bad > 0
+            sprintf('removing %d bad voxels; sometimes happens due to islands in manual seg',length([bad;bad]))
+        end
         Laplace_AP(bad) = []; Laplace_PD(bad) = []; Laplace_IO(bad) = []; idxgm(bad) = [];
         
+        save([output '_laplace.mat'],'origsz','output','LR','cropping','sub',...
+        'origheader','idxgm','sz','Laplace_AP','Laplace_PD','Laplace_IO',...
+        'sourceAP','sinkAP','sourcePD','sinkPD','sourceIO','sinkIO',...
+        'manual_masks','output_dir','labeldescription','quantitative_dir',...
+        'manual_fns', 'APres', 'PDres', 'IOres');
+    
         %% binned niftis for visualization
         if suppress_visuals==0
-            
             origheader.img = zeros(origsz);
             
             out = zeros(sz);
-            out(idxgm) = ceil(Laplace_AP*20);
-            out(sinkAP) = 50;
-            out(sourceAP) = 51;
-            if LR=='L'
-                out = flipdim(out,1); %flip on x (i.e. sagittally)
-            end
+            out(idxgm) = Laplace_AP*APres+1;
+            out(sinkAP) = APres+10;
+            out(sourceAP) = APres+11;
             origheader.img(cropping==1) = out;
             save_untouch_nii(origheader,[output '_srcsnk-AP_PhiMap.nii.gz']);
             
             out = zeros(sz);
-            out(idxgm) = ceil(Laplace_PD*20);
-            out(sinkPD) = 50;
-            out(sourcePD) = 51;
-            if LR=='L'
-                out = flipdim(out,1); %flip on x (i.e. sagittally)
-            end
+            out(idxgm) = Laplace_PD*PDres+1;
+            out(sinkPD) = PDres+10;
+            out(sourcePD) = PDres+11;
             origheader.img(cropping==1) = out;
             save_untouch_nii(origheader,[output '_srcsnk-PD_PhiMap.nii.gz']);
             
             out = zeros(sz);
-            out(idxgm) = ceil(Laplace_IO*4);
-            out(sourceIO) = 51;
-            if LR=='L'
-                out = flipdim(out,1); %flip on x (i.e. sagittally)
-            end
+            out(idxgm) = Laplace_IO*IOres+1;
+            out(sourceIO) = IOres+10;
             origheader.img(cropping==1) = out;
             save_untouch_nii(origheader,[output '_srcsnk-IO_PhiMap.nii.gz']);
         end
         
         %%
-        save([output '_laplace.mat'],'origsz','output','LR','cropping','sub',...
-            'origheader','idxgm','sz','Laplace_AP','Laplace_PD','Laplace_IO',...
-            'sourceAP','sinkAP','sourcePD','sinkPD','sourceIO','sinkIO',...
-            'manual_masks','output_dir','labeldescription','quantitative_dir',...
-            'manual_fns');
         if quantitative_morphometry_analyses == 1
             try
                 Unfolded_morphometry
+            catch
+                disp('Error in morphometry mapping, but unfolding coordinates are still correct.');
+            end
+            try
                 Unfolded_qmapping
+            catch
+                disp('Error in quantitative mapping, but unfolding coordinates are still correct.');
             end
         end
+        
+        disp([fn ' done. Please inspect results to ensure correct unfolding!']);
     end
 end
 

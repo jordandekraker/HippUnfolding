@@ -92,6 +92,11 @@ end
 % interative averaging filter with Neumann boundary condition and fixed
 % source/sink values
 init(isnan(init)) = 0.5; %guess if there are still any nans! (e.g. from init)
-[LP,iter_change] = laplace_iters_mex(fg, source, sink, init, maxiters, sz);
+try
+    [LP,iter_change] = laplace_iters_mex(fg, source, sink, init, maxiters, sz);
+catch
+    disp('mex of laplace_iters failed, using non-mex file instead (slower, but will produce the same results). Retry laplace_iters_mex.prj (using MATLAB Coder) for faster results.');
+    [LP,iter_change] = laplace_iters(fg, source, sink, init, maxiters, sz);
+end
 LP = LP(fg);
 end

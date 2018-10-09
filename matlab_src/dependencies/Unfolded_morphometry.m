@@ -70,6 +70,8 @@ if suppress_visuals==0
     axis equal tight;
     colormap('jet');
     title([sub 'hemi-' LR ' mean curvature']);
+    
+    drawnow;
 end
 
 %% compute thickness
@@ -127,6 +129,8 @@ if suppress_visuals==0
     axis equal tight;
     colormap('jet');
     title([sub 'hemi-' LR ' thickness']);
+    
+    drawnow;
 end
 
 save([output '_morphometry.mat'],'Vuvw','Vxyz','FV','Cmean','streamlengths',...
