@@ -27,7 +27,7 @@ elseif ~isempty(p2) && ~isempty(p3) %T1w/T2w
     modality = map1.img./map2.img; clear map1 map2
     mapModality = 'T1w/T2w';
 elseif ~isempty(p3) %just take T1w
-    modality = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p2(1)}]);
+    modality = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p3(1)}]);
     modality = modality.img;
     mapModality = 'T1w';
 end
