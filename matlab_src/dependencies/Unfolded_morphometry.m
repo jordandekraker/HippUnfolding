@@ -1,5 +1,5 @@
 % parameters to be set
-APres = 256; PDres = 128; IOres = 8;
+% APres = 256; PDres = 128; IOres = 8;
 %ratio should be aproximately 2:1:(1/32 or 1/16)
 
 
@@ -10,7 +10,10 @@ Laplace_AP(rm)=[]; Laplace_PD(rm)=[]; Laplace_IO(rm)=[]; idxgm(rm)=[];
 %% interpolate between unfolded and native space
 
 [i_L,j_L,k_L]=ind2sub(sz,idxgm);
-APsamp = 0:1/APres:1; PDsamp = 0:1/PDres:1; IOsamp = 0:1/IOres:1;
+APres2 = APres+1; PDres2 = PDres+1; IOres2 = IOres+1;
+APsamp = 1/APres2:1/APres2:1-1/APres2; 
+PDsamp = 1/PDres2:1/PDres2:1-1/PDres2; 
+IOsamp = 1/IOres2:1/IOres2:1-1/IOres2;
 [v,u,w] = meshgrid(PDsamp,APsamp,IOsamp); % have to switch AP and PD because matlab sucks
 Vuvw = [u(:),v(:),w(:)];
 
@@ -23,38 +26,42 @@ y = scattInterp(Vuvw(:,1),Vuvw(:,2),Vuvw(:,3));
 scattInterp=scatteredInterpolant(Laplace_AP,Laplace_PD,Laplace_IO,k_L,interp,extrap);
 z = scattInterp(Vuvw(:,1),Vuvw(:,2),Vuvw(:,3));
 clear scattInterp
+Vxyz = [x(:) y(:) z(:)];
 
-Vxyz = [x(:),y(:),z(:)];
+%% get midpoint surface
+
+% get face connectivity
+t = [1:(APres)*(PDres)]';
+F = [t,t+1,t+(APres) ; t,t-1,t-(APres)];
+badfaces = any(F>(APres)*(PDres) | F<=0, 2);
+F(badfaces,:) = [];
+FV.faces = F;
+
+% get midpoint vertices
+IO=ceil(IOres/2);
+x = reshape(x,(APres),(PDres),(IOres));
+y = reshape(y,(APres),(PDres),(IOres));
+z = reshape(z,(APres),(PDres),(IOres));
+x = x(:,:,IO); y = y(:,:,IO); z = z(:,:,IO);
+x(APres,:) = nan; %this is hacky, but delete posterior pts to fix face connectivity
+FV.vertices = [x(:) y(:) z(:)];
 
 % mask area outside roi
 [~,keep1] = intersect(floor(Vxyz),[i_L,j_L,k_L],'rows');
 [~,keep2] = intersect(ceil(Vxyz),[i_L,j_L,k_L],'rows');
 keep = unique([keep1; keep2]);
-toss = 1:length(Vxyz); toss(keep) = [];
-%         Vxyz(toss,:) = nan;
+FV.vertices(~keep,:) = nan;
 
 %% compute curvatures
 
-% get face connectivity
-t = [1:(APres+1)*(PDres+1)]';
-F = [t,t+1,t+(APres+1) ; t,t-1,t-(APres+1)];
-badfaces = any(F>(APres+1)*(PDres+1) | F<=0 , 2);
-F(badfaces,:) = [];
-
-% midpoint curvatures
-IO=ceil(IOres/2);
-x = reshape(x,(APres+1),(PDres+1),(IOres+1));
-y = reshape(y,(APres+1),(PDres+1),(IOres+1));
-z = reshape(z,(APres+1),(PDres+1),(IOres+1));
-x2 = x(:,:,IO); y2 = y(:,:,IO); z2 = z(:,:,IO);
-FV.vertices = [x2(:) y2(:) z2(:)];
-FV.faces = F;
 warning('off');
 Cmean = patchcurvature(FV);%, true);
 Cmean = real(Cmean);
+if LR=='R'
+    Cmean = -Cmean; %opens on opposite side
+end
 warning('on');
-
-Cmean = reshape(Cmean,[APres+1,PDres+1]);
+Cmean = reshape(Cmean,[APres,PDres]);
 
 if suppress_visuals==0
     tmp = Cmean;
@@ -62,15 +69,24 @@ if suppress_visuals==0
     tmp(isoutlier(tmp(:),'mean')) = nan;
     tmp = inpaintn(tmp);
     tmp = imfilter(tmp,smoothKernel,'symmetric');
+    t = sort(tmp(:));
+    window = [t(round(length(t)*.05)) t(round(length(t)*.95))];
 
     figure;
+    subplot(1,2,1);
     p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',tmp(:));
-    p.FaceColor = 'interp';
+    p.FaceColor = 'flat';
     p.LineStyle = 'none';
     axis equal tight;
     colormap('jet');
-    title([sub 'hemi-' LR ' mean curvature']);
-    
+    light;
+    caxis(window);
+    title([sub '\_hemi-' LR ' curvature']);
+    subplot(1,2,2);
+    imagesc(tmp);
+    axis equal tight;
+    colormap('jet');
+    caxis(window);
     drawnow;
 end
 
@@ -81,7 +97,7 @@ threshold = [0.1 4.0]; %min and max thicknesses in mm
 stepsize = 0.1;
 maxvert = threshold(2)/voxelsize/stepsize;
 
-start = [x2(:) y2(:) z2(:)];
+start = [x(:) y(:) z(:)];
 start(isnan(start)) = 0;
 
 % midpoint to outside
@@ -113,7 +129,7 @@ streamlengths = streamlengths1 + streamlengths2;
 bad = find(streamlengths>=threshold(2) | streamlengths<=threshold(1));
 streamlengths(bad) = nan;
 
-streamlengths = reshape(streamlengths,[APres+1,PDres+1]);
+streamlengths = reshape(streamlengths,[APres,PDres]);
 
 if suppress_visuals==0
     tmp = streamlengths;
@@ -121,15 +137,24 @@ if suppress_visuals==0
     tmp(isoutlier(tmp(:),'mean')) = nan;
     tmp = inpaintn(tmp);
     tmp = imfilter(tmp,smoothKernel,'symmetric');
-
+    t = sort(tmp(:));
+    window = [t(round(length(t)*.05)) t(round(length(t)*.95))];
+    
     figure;
+    subplot(1,2,1);
+    title([sub '\_hemi-' LR ' thickness']);
     p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',tmp(:));
-    p.FaceColor = 'interp';
+    p.FaceColor = 'flat';
     p.LineStyle = 'none';
     axis equal tight;
     colormap('jet');
-    title([sub 'hemi-' LR ' thickness']);
-    
+    light;
+    caxis(window);
+    subplot(1,2,2);
+    imagesc(tmp);
+    axis equal tight;
+    colormap('jet');
+    caxis(window);
     drawnow;
 end
 

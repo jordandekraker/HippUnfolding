@@ -14,10 +14,9 @@ function out = Laplace_unfold(manual_masks,output_dir,quantitative_dir,labeldesc
 
 %% default arguments
 
-% sampling resolution in each direction
-APres = 128;
-PDres = 64;
-IOres = 4;
+% parameters to be set
+APres = 256; PDres = 128; IOres = 4;
+%ratio should be aproximately 2:1:(1/32 or 1/16)
 
 %orthogonalization of AP and PD gradients (by adjusting boundary
 %conditions) (causes additional problems on low-res data)

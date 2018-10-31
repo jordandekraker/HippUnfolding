@@ -26,8 +26,8 @@ elseif ~isempty(p2) && ~isempty(p3) %T1w/T2w
     map2 = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p3(1)}]);
     modality = map1.img./map2.img; clear map1 map2
     mapModality = 'T1w/T2w';
-elseif ~isempty(p3) %just take T1w
-    modality = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p3(1)}]);
+elseif ~isempty(p2) %just take T1w
+    modality = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p2(1)}]);
     modality = modality.img;
     mapModality = 'T1w';
 end
@@ -46,7 +46,7 @@ inds(bad) = 1;
 flatmap = MRdata(inds);
 flatmap(bad) = nan;
 
-flatmap = reshape(flatmap,[(APres+1),(PDres+1),(IOres+1)]);
+flatmap = reshape(flatmap,[(APres),(PDres),(IOres)]);
 
 if suppress_visuals==0
     tmp = flatmap;
@@ -55,16 +55,25 @@ if suppress_visuals==0
     tmp = mean(tmp,3);
     smoothKernel = fspecial('gaussian',[25 25],3);
     tmp = inpaintn(tmp);
-    tmp = imfilter(tmp,smoothKernel,'symmetric');
+%     tmp = imfilter(tmp,smoothKernel,'symmetric');
+    t = sort(tmp(:));
+    window = [t(round(length(t)*.05)) t(round(length(t)*.95))];
     
     figure;
+    subplot(1,2,1);
     p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',tmp(:));
     p.FaceColor = 'interp';
     p.LineStyle = 'none';
     axis equal tight;
     colormap('jet');
-    title([sub 'hemi-' LR ' mean ' mapModality]);
-    
+    light;
+    caxis(window);
+    title([sub '\_hemi-' LR ' ' mapModality]);
+    subplot(1,2,2);
+    imagesc(tmp);
+    axis equal tight;
+    colormap('jet');
+    caxis(window);
     drawnow;
 end
 
