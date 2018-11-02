@@ -48,6 +48,9 @@ flatmap(bad) = nan;
 
 flatmap = reshape(flatmap,[(APres),(PDres),(IOres)]);
 
+if exist('suppress_visuals')==0
+    suppress_visuals = 0;
+end
 if suppress_visuals==0
     tmp = flatmap;
     tmp(isoutlier(tmp(:),'mean')) = nan;
