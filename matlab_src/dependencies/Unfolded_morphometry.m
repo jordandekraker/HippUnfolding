@@ -17,7 +17,7 @@ IOsamp = [1:IOres]/(IOres+1);
 Vuvw = [u(:),v(:),w(:)];
 
 interp='linear';
-extrap='none';
+extrap='nearest';
 scattInterp=scatteredInterpolant(Laplace_AP,Laplace_PD,Laplace_IO,i_L,interp,extrap);
 x = scattInterp(Vuvw(:,1),Vuvw(:,2),Vuvw(:,3));
 scattInterp=scatteredInterpolant(Laplace_AP,Laplace_PD,Laplace_IO,j_L,interp,extrap);
@@ -51,7 +51,7 @@ x = x(:,:,IO); y = y(:,:,IO); z = z(:,:,IO);
 x(APres,:) = nan; %this is hacky, but delete posterior pts to fix face connectivity
 FV.vertices = [x(:) y(:) z(:)];
 
-% mask area outside roi
+% mask any area outside roi
 [~,keep1] = intersect(floor(Vxyz),[i_L,j_L,k_L],'rows');
 [~,keep2] = intersect(ceil(Vxyz),[i_L,j_L,k_L],'rows');
 keep = unique([keep1; keep2]);
@@ -76,7 +76,7 @@ if suppress_visuals==0
     smoothKernel = fspecial('gaussian',[25 25],3);
     tmp(isoutlier(tmp(:),'mean')) = nan;
     tmp = inpaintn(tmp);
-    tmp = imfilter(tmp,smoothKernel,'symmetric');
+%     tmp = imfilter(tmp,smoothKernel,'symmetric');
     t = sort(tmp(:));
     window = [t(round(length(t)*.05)) t(round(length(t)*.95))];
 
@@ -144,7 +144,7 @@ if suppress_visuals==0
     smoothKernel = fspecial('gaussian',[25 25],3);
     tmp(isoutlier(tmp(:),'mean')) = nan;
     tmp = inpaintn(tmp);
-    tmp = imfilter(tmp,smoothKernel,'symmetric');
+%     tmp = imfilter(tmp,smoothKernel,'symmetric');
     t = sort(tmp(:));
     window = [t(round(length(t)*.05)) t(round(length(t)*.95))];
     

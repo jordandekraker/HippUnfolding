@@ -22,7 +22,7 @@ APres = 256; PDres = 128; IOres = 4;
 %conditions) (causes additional problems on low-res data)
 orthogonalize = false;
 
-%optional arguments
+%optional input arguments
 if exist('quantitative_dir')~=1 || isempty('quantitative_dir')
     quantitative_dir = 'CoronalOblique0.3mm';
 end
