@@ -10,10 +10,9 @@ Laplace_AP(rm)=[]; Laplace_PD(rm)=[]; Laplace_IO(rm)=[]; idxgm(rm)=[];
 %% interpolate between unfolded and native space
 
 [i_L,j_L,k_L]=ind2sub(sz,idxgm);
-APres2 = APres+1; PDres2 = PDres+1; IOres2 = IOres+1;
-APsamp = 1/APres2:1/APres2:1-1/APres2; 
-PDsamp = 1/PDres2:1/PDres2:1-1/PDres2; 
-IOsamp = 1/IOres2:1/IOres2:1-1/IOres2;
+APsamp = [1:APres]/(APres+1); 
+PDsamp = [1:PDres]/(PDres+1); 
+IOsamp = [1:IOres]/(IOres+1); 
 [v,u,w] = meshgrid(PDsamp,APsamp,IOsamp); % have to switch AP and PD because matlab sucks
 Vuvw = [u(:),v(:),w(:)];
 
@@ -31,10 +30,16 @@ Vxyz = [x(:) y(:) z(:)];
 %% get midpoint surface
 
 % get face connectivity
-t = [1:(APres)*(PDres)]';
+t = [1:(APres*PDres)]';
 F = [t,t+1,t+(APres) ; t,t-1,t-(APres)];
-badfaces = any(F>(APres)*(PDres) | F<=0, 2);
-F(badfaces,:) = [];
+
+F = reshape(F',[3,APres,PDres,2]);
+F(:,APres,:,1) = nan;
+F(:,1,:,2) = nan;
+F(:,:,PDres,1) = nan;
+F(:,:,1,2) = nan;
+F(isnan(F)) = [];
+F=reshape(F,[3,(APres-1)*(PDres-1)*2])';
 FV.faces = F;
 
 % get midpoint vertices
