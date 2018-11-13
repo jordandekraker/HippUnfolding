@@ -18,16 +18,16 @@ p3 = strfind(qfilenames, 'T2w');
 p3 = find(~cellfun('isempty', p3));
 
 if ~isempty(p1) %load first T1map available
-    modality = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p1(1)}]);
+    modality = load_untouch_nii([quantitative_dir '/' sub '/anat/' qfilenames{p1(1)}]);
     modality = modality.img; 
     mapModality = 'T1map';
 elseif ~isempty(p2) && ~isempty(p3) %T1w/T2w
-    map1 = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p2(1)}]);
-    map2 = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p3(1)}]);
+    map1 = load_untouch_nii([quantitative_dir '/' sub '/anat/' qfilenames{p2(1)}]);
+    map2 = load_untouch_nii([quantitative_dir '/' sub '/anat/' qfilenames{p3(1)}]);
     modality = map1.img./map2.img; clear map1 map2
     mapModality = 'T1w/T2w';
 elseif ~isempty(p2) %just take T1w
-    modality = load_nii([quantitative_dir '/' sub '/anat/' qfilenames{p2(1)}]);
+    modality = load_untouch_nii([quantitative_dir '/' sub '/anat/' qfilenames{p2(1)}]);
     modality = modality.img;
     mapModality = 'T1w';
 end
@@ -36,9 +36,9 @@ end
 
 MRdata = zeros(sz);
 MRdata(:) = modality(cropping==1); clear map
-if LR=='L'
-    MRdata = flipdim(MRdata,1);
-end
+%if LR=='L'
+%    MRdata = flipdim(MRdata,1);
+%end
 Vxyz = round(Vxyz);
 inds = sub2ind(sz, Vxyz(:,1),Vxyz(:,2),Vxyz(:,3));
 bad = isnan(inds);
@@ -48,6 +48,9 @@ flatmap(bad) = nan;
 
 flatmap = reshape(flatmap,[(APres),(PDres),(IOres)]);
 
+if exist('suppress_visuals')==0
+    suppress_visuals = 0;
+end
 if suppress_visuals==0
     tmp = flatmap;
     tmp(isoutlier(tmp(:),'mean')) = nan;

@@ -68,6 +68,9 @@ end
 warning('on');
 Cmean = reshape(Cmean,[APres,PDres]);
 
+if exist('suppress_visuals')==0
+    suppress_visuals = 0;
+end
 if suppress_visuals==0
     tmp = Cmean;
     smoothKernel = fspecial('gaussian',[25 25],3);
