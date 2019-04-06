@@ -48,7 +48,6 @@ x = reshape(x,(APres),(PDres),(IOres));
 y = reshape(y,(APres),(PDres),(IOres));
 z = reshape(z,(APres),(PDres),(IOres));
 x = x(:,:,IO); y = y(:,:,IO); z = z(:,:,IO);
-x(APres,:) = nan; %this is hacky, but delete posterior pts to fix face connectivity
 FV.vertices = [x(:) y(:) z(:)];
 
 % mask any area outside roi
@@ -75,12 +74,12 @@ if suppress_visuals==0
     tmp = Cmean;
     smoothKernel = fspecial('gaussian',[25 25],3);
     tmp(isoutlier(tmp(:),'mean')) = nan;
-    tmp = inpaintn(tmp);
-%     tmp = imfilter(tmp,smoothKernel,'symmetric');
+    tmp = inpaintn(tmp); 
+    tmp = imfilter(tmp,smoothKernel,'symmetric');
     t = sort(tmp(:));
     window = [t(round(length(t)*.05)) t(round(length(t)*.95))];
 
-    figure;
+    figure; 
     subplot(1,2,1);
     p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',tmp(:));
     p.FaceColor = 'flat';
@@ -89,9 +88,9 @@ if suppress_visuals==0
     colormap('jet');
     light;
     caxis(window);
-    title([sub '\_hemi-' LR ' curvature']);
-    subplot(1,2,2);
-    imagesc(tmp);
+    title('curvature');
+    subplot(1,2,2); 
+    imagesc(tmp');
     axis equal tight;
     colormap('jet');
     caxis(window);
@@ -144,13 +143,12 @@ if suppress_visuals==0
     smoothKernel = fspecial('gaussian',[25 25],3);
     tmp(isoutlier(tmp(:),'mean')) = nan;
     tmp = inpaintn(tmp);
-%     tmp = imfilter(tmp,smoothKernel,'symmetric');
+    tmp = imfilter(tmp,smoothKernel,'symmetric');
     t = sort(tmp(:));
     window = [t(round(length(t)*.05)) t(round(length(t)*.95))];
     
-    figure;
+    figure; 
     subplot(1,2,1);
-    title([sub '\_hemi-' LR ' thickness']);
     p = patch('Faces',FV.faces,'Vertices',FV.vertices,'FaceVertexCData',tmp(:));
     p.FaceColor = 'flat';
     p.LineStyle = 'none';
@@ -158,13 +156,14 @@ if suppress_visuals==0
     colormap('jet');
     light;
     caxis(window);
-    subplot(1,2,2);
-    imagesc(tmp);
+    title('thickness');
+    subplot(1,2,2); 
+    imagesc(tmp');
     axis equal tight;
     colormap('jet');
     caxis(window);
     drawnow;
 end
 
-save([output '_morphometry.mat'],'Vuvw','Vxyz','FV','Cmean','streamlengths',...
+save([output 'morphometry.mat'],'Vuvw','Vxyz','FV','Cmean','streamlengths',...
     'LR','APres','PDres','IOres','output');
