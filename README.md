@@ -7,6 +7,7 @@ Test it out in MATLAB on the example data using the command from the /Laplace_un
 
 # Dependencies
 
+- MCC code is available so everything can be run without a Matlab lisence. This code may not be up-to date. Otherwise:
 - MATLAB + Image Processing toolbox
 - (Optional) Use the Matlab Coder to improve speed. MEX the laplace_iters.m file by double clicking matlab_src/dependencies/laplace_iters_mex.prj and follow the default instructions.
 
