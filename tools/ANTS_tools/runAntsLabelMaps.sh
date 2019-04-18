@@ -98,6 +98,8 @@ out="--output [$out_dir/ants_]"
 echo neuroglia antsRegistration -d $dim --interpolation $interp $rigid $affine $syn $out
 neuroglia antsRegistration -d $dim --interpolation $interp $rigid $affine $syn $out
 
+
+
 fi
 
 
@@ -141,7 +143,7 @@ then
 	    -o $warped_target\
 	    -r $template_bin\
 	    -t $out_dir/ants_1Warp.nii.gz \
-	    -t [$out_dir/ants_0GenericAffine.mat, 1] 
+	    -t $out_dir/ants_0GenericAffine.mat # removed affine inversion
 
 	antsApplyTransforms \
 	    -d 3 \
@@ -150,7 +152,7 @@ then
 	    -o $warped_target\
 	    -r $template_bin\
 	    -t $out_dir/ants_1Warp.nii.gz \
-	    -t [$out_dir/ants_0GenericAffine.mat, 1] 
+	    -t $out_dir/ants_0GenericAffine.mat # removed affine inversion
 
 fi
 
