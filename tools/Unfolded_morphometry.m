@@ -1,5 +1,6 @@
 % NOTE: should load in laplace.mat first!
 
+APres=globargs.UnfoldRes(1); PDres=globargs.UnfoldRes(2); IOres=globargs.UnfoldRes(3); 
 
 if exist('suppress_visuals')==0
     suppress_visuals = 0;
@@ -67,7 +68,7 @@ end
 GI = imresize(arcAP.^2+arcPD.^2,[APres,PDres]);
 Vrec = reshape(Vrec,[APres*PDres,3]);
 
-if suppress_visuals==0
+if globargs.suppress_visuals==0
     plot_foldunfold(GI,FV,true,'Gyrification Index');
 end
 
@@ -76,13 +77,13 @@ end
 warning('off');
 Cmean = patchcurvature(FV);%, true);
 Cmean = real(Cmean);
-if LR=='R'
+if globargs.hemi=='R'
     Cmean = -Cmean; %opens on opposite side
 end
 warning('on');
 Cmean = reshape(Cmean,[APres,PDres]);
 
-if suppress_visuals==0
+if globargs.suppress_visuals==0
     plot_foldunfold(Cmean,FV,true,'Curvature');
 end
 
@@ -127,9 +128,9 @@ streamlengths(bad) = nan;
 
 streamlengths = reshape(streamlengths,[APres,PDres]);
 
-if suppress_visuals==0
+if globargs.suppress_visuals==0
     plot_foldunfold(streamlengths,FV,true,'Thickness');
 end
 
 save([output 'morphometry.mat'],'Vuvw','Vxyz','Vmid','Vrec','F','FV','Cmean','streamlengths','GI',...
-    'LR','APres','PDres','IOres','output');
+    'globargs','output');

@@ -1,40 +1,30 @@
-function out = Laplace_unfold(manual_mask,output_dir,orig_img,labeldescription_fn,suppress_visuals)
+function out = Laplace_unfold(manual_mask,output_dir,orig_img,opts)
 % performs laplacian unfolding on the image of manually labelled structures
 %
 % INPUTS:
 % manual_masks: single nifti file
 % output_dir: relative or absolute path
 % orig_img: same space as manual_mask. For quantitative mapping only.
-% labeldescription_fn(optional): 1 for basic structures, 2 for extended
-% dummy labels, or specify custom .tsv file (see misc/labeldescription.tsv)
-% suppress_visuals(optional): 0(default) or 1 generate binned .nii and
-% gradients and morphometry/quantitative map figures
 
-%% default arguments
+%% optional params
+% defaults
+globargs.hemi = []; % hemisphere
+globargs.isBIDS = false;
+globargs.suppress_visuals = 0;
+globargs.labeldescription_fn = 'misc/labeldescription_basic.tsv';
+globargs.orthogonalize = false;
+globargs.UnfoldRes = [256 128 4];
 
-% parameters to be set
-APres = 256; PDres = 128; IOres = 4;
-%ratio should be aproximately 2:1:(1/32 or 1/16)
-
-%orthogonalization of AP and PD gradients (by adjusting boundary
-%conditions) (causes additional problems on low-res data)
-orthogonalize = false;
-
-if exist('labeldescription_fn')~=1 || isempty('labeldescription_fn')
-    labeldescription_fn = 1;
+if exist('opts') == 1
+    pnames = fieldnames(opts);
+    for i = 1:length(pnames)
+        globargs.(pnames{i}) = opts.(pnames{i});
+    end
 end
-if exist('suppress_visuals')~=1 || isempty('suppress_visuals')
-    suppress_visuals = 0;
-end
-isBIDS = false;
 
 %% get & format label description file
-if labeldescription_fn==1
-    labeldescription_fn = 'misc/labeldescription_basic.tsv';
-elseif labeldescription_fn==2
-    labeldescription_fn = 'misc/labeldescription_extendedSRLMdummylabels.tsv';
-end
-labeldescription = tdfread(labeldescription_fn);
+
+labeldescription = tdfread(globargs.labeldescription_fn);
 labeldescription.label = cellstr(labeldescription.label);
 labeldescription.boundary = cellstr(labeldescription.boundary);
 labeldescription = table(labeldescription.boundary,labeldescription.value,labeldescription.label);
@@ -42,14 +32,16 @@ labeldescription = table(labeldescription.boundary,labeldescription.value,labeld
 %% get output filename
 output = [output_dir '/'];
 mkdir(output);
-LR = strmatch(output_dir,'hemi-');
-if LR>0
-    LR = output_dir(LR+5);
-else
-    disp('please specify either hemi-L or hemi-R in output_dir');
-    break
-end
 
+if isempty(globargs.hemi)
+    globargs.hemi = strmatch(output_dir,'hemi-');
+    if globargs.hemi>0
+        globargs.hemi = output_dir(LR+5);
+    else
+        disp('please specify opts.hemi or add hemi-L or hemi-R in output_dir');
+        return
+    end
+end
 %% load & crop manual segmentation
 origheader = load_untouch_nii(manual_mask);
 
@@ -104,7 +96,7 @@ Laplace_IO = laplace_solver(idxgm,sourceIO,sinkIO,50,[],sz);
 % conditions for the AP and PD gradients such that they always meet, making
 % them closer to orthogonal at the edges
 
-if orthogonalize
+if globargs.orthogonalize
     laplace_orthogonalize; %this seems to work poorly on low-res data...
 end
 
@@ -120,14 +112,13 @@ if bad > 0
 end
 Laplace_AP(bad) = []; Laplace_PD(bad) = []; Laplace_IO(bad) = []; idxgm(bad) = [];
 
-save([output 'laplace.mat'],'origsz','output','LR','cropping',...
+save([output 'laplace.mat'],'origsz','output','cropping',...
 'origheader','idxgm','sz','Laplace_AP','Laplace_PD','Laplace_IO',...
 'sourceAP','sinkAP','sourcePD','sinkPD','sourceIO','sinkIO',...
-'manual_mask','labeldescription','orig_img','isBIDS',...
-'APres', 'PDres', 'IOres');
+'manual_mask','labeldescription','orig_img','globargs');
 
 %% binned niftis for visualization
-if suppress_visuals==0
+if globargs.suppress_visuals==0
     origheader.img = zeros(origsz);
 
     out = zeros(sz);

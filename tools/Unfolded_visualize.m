@@ -2,6 +2,7 @@
 % includes average borders from current study, and rescales the
 % image according to average real world size from the current study.
 
+APres=globargs.UnfoldRes(1); PDres=globargs.UnfoldRes(2); IOres=globargs.UnfoldRes(3); 
 
 %% MRI data to plot (colours on the scatter plot)
 
@@ -15,7 +16,7 @@ origMRdata = [];
 % MRdata(:) = MRdata(cropping==1);
 
 % if left, flip on sagittal (z plane, or the third dimension in this matrix)
-if LR=='L'
+if globargs.hemi=='L'
     MRdata = flipdim(MRdata,1);
 end
 

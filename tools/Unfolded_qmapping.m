@@ -1,15 +1,16 @@
 % NOTE: should load in laplace.mat and morphometry.mat first!
 
+APres=globargs.UnfoldRes(1); PDres=globargs.UnfoldRes(2); IOres=globargs.UnfoldRes(3); 
 
 %% prioritize from available modalities
 % tries to choose modalities to flatmap in this order: T1map > T1w/T2w > T1w
 
-if ~isBIDS
+if ~globargs.isBIDS
     modality = load_untouch_nii(orig_img);
     modality = modality.img; 
     mapModality = 'Input intensity';
     
-elseif isBIDS
+elseif globargs.isBIDS
     [~,qfilenames] = system(['ls ' quantitative_dir '/' sub '/anat']);
     qfilenames = strsplit(qfilenames)';
     i = strfind(qfilenames, '.nii');
@@ -59,10 +60,7 @@ flatmap(bad) = nan;
 
 flatmap = reshape(flatmap,[(APres),(PDres),(IOres)]);
 
-if exist('suppress_visuals')==0
-    suppress_visuals = 0;
-end
-if suppress_visuals==0
+if globargs.suppress_visuals==0
     tmp = flatmap;
     tmp(isoutlier(tmp(:),'mean')) = nan;
     tmp = inpaintn(tmp); % this should be done in 3D
@@ -70,5 +68,4 @@ if suppress_visuals==0
     plot_foldunfold(tmp,FV,true,mapModality);
 end
 
-save([output 'qmap.mat'],'Vuvw','Vxyz','FV','flatmap','mapModality','LR',...
-    'APres','PDres','IOres','output');
+save([output 'qmap.mat'],'Vuvw','Vxyz','FV','flatmap','mapModality','output','globargs');
