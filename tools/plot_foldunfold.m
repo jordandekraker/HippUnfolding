@@ -16,6 +16,7 @@ end
 
 % set 95% colourmap window
 t = sort(img(:));
+t(isnan(t)) = [];
 window = [t(round(length(t)*.05)) t(round(length(t)*.95))];
 
 figurehandle=figure;
