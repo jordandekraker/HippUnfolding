@@ -6,6 +6,7 @@ out_dir=$3
 
 if [ "$#" -lt 3 ]
 then
+	 echo "registers two labelmaps usings ANTS. transforms are fully invertible."
 	 echo "Usage: $0 <in_template_seg_nii> <in_target_seg_nii> <out_dir>  [optional arguments]"
 	 echo ""
 	 echo " -r cc_radius (default 3)"
