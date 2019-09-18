@@ -20,9 +20,12 @@ then
 
  shift 3
 
-convergence="[100x50x50,1e-6,10]"
-shrink_factors="4x2x1"
-smoothing_sigmas="4x2x1vox"
+convergence_aff="[100x50,1e-6,10]"
+shrink_factors_aff="16x4"
+smoothing_sigmas_aff="8x4vox"
+convergence="[100x50x50x25,1e-6,10]"
+shrink_factors="8x4x2x1"
+smoothing_sigmas="8x4x2x1vox" # cannot exceed 8vox (hard-coded limit in ANTS)
 radiusnbins=3
 stepsize=0.1
 updatefield=3
@@ -86,10 +89,10 @@ done
 if [ ! -e $out_dir/ants_1Warp.nii.gz ]
 then
 
-
+multires_aff="--convergence $convergence_aff --shrink-factors $shrink_factors_aff --smoothing-sigmas $smoothing_sigmas_aff"
 multires="--convergence $convergence --shrink-factors $shrink_factors --smoothing-sigmas $smoothing_sigmas"
-rigid="$multires $metric --transform Rigid[0.1]"
-affine="$multires $metric --transform Affine[0.1]"
+rigid="$multires_aff $metric --transform Rigid[0.1]"
+affine="$multires_aff $metric --transform Affine[0.1]"
 syn="$multires $metric --transform SyN[${stepsize},$updatefield,$totalfield]"
 
 out="--output [$out_dir/ants_]"

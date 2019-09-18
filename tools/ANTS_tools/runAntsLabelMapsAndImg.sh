@@ -2,11 +2,13 @@
 
 in_template_nii=$1
 in_target_nii=$2
-out_dir=$3
+in_template_img=$3
+in_target_img=$4
+out_dir=$5
 
 if [ "$#" -lt 3 ]
 then
-	 echo "Usage: $0 <in_ref_seg_nii> <in_floating_seg_nii> <out_dir>  [optional arguments]"
+	 echo "Usage: $0 <in_ref_seg_nii> <in_floating_seg_nii> <in_ref_img_nii> <in_flo_img_nii> <out_dir>  [optional arguments]"
 	 echo ""
 	 echo " -r cc_radius (default 3)"
 	 echo " -s SyN_stepsize (default 0.1)"
@@ -79,6 +81,7 @@ fi
 #template is fixed
 #target is moving
 metric="$metric --metric ${cost}[${template_bin},${target_bin},1,${radiusnbins}]"
+metric2="$metric --metric ${cost}[${in_template_img},${in_target_img},1,${radiusnbins}]"
 
 done
 
@@ -88,9 +91,9 @@ then
 
 
 multires="--convergence $convergence --shrink-factors $shrink_factors --smoothing-sigmas $smoothing_sigmas"
-rigid="$multires $metric --transform Rigid[0.1]"
-affine="$multires $metric --transform Affine[0.1]"
-syn="$multires $metric --transform SyN[${stepsize},$updatefield,$totalfield]"
+rigid="$multires $metric $metric2 --transform Rigid[0.1]"
+affine="$multires $metric $metric2 --transform Affine[0.1]"
+syn="$multires $metric $metric2 --transform SyN[${stepsize},$updatefield,$totalfield]"
 
 out="--output [$out_dir/ants_]"
 
