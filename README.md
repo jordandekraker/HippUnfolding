@@ -1,3 +1,6 @@
+DEPRECATED
+Please see https://github.com/jordandekraker/Hippocampal_AutoTop for more up-to-date code
+
 # HippUnfolding
 ![Alt Text](https://github.com/jordandekraker/HippUnfolding/blob/master/misc/subfields_hemi-L_2.gif)
 
